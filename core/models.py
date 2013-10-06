@@ -6,8 +6,11 @@ class Mission(models.Model):
     A mission on which photos were taken.
     """
 
-    code = models.CharField(max_length=30)
+    code = models.CharField(max_length=30, unique=True)
     name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return "%s (%s)" % (self.name, self.code)
 
 
 class Image(models.Model):
@@ -38,6 +41,9 @@ class Image(models.Model):
     sun_elevation = models.IntegerField(null=True, blank=True)  # Degrees
     altitude = models.IntegerField(null=True, blank=True)  # In metres
 
+    def __str__(self):
+        return "%s-%s" % (self.mission.code, self.code)
+
 
 class ImageFile(models.Model):
     """
@@ -48,3 +54,6 @@ class ImageFile(models.Model):
     file = models.FileField(upload_to="image_files")
     width = models.IntegerField()
     height = models.IntegerField()
+
+    def __str__(self):
+        return "%s (%sx%s)" % (self.file, self.width, self.height)
