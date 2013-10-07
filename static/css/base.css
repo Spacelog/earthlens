@@ -23,7 +23,7 @@ h1 {
     }
 
 .content {
-    width: 1200px;
+    width: 1500px;
     margin: 0 auto;
 }
 
@@ -33,20 +33,23 @@ h1 {
 
 .column {
     float: left;
-    width: 300px;
+    width: 375px;
     overflow: hidden;
 }
 
 .image {
     float: left;
     position: relative;
-    width: 298px;
-    height: 298px;
+    width: 375px;
+    height: 375px;
     border: 1px solid black;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 }
     .image.large {
-        width: 598px;
-        height: 598px;
+        width: 750px;
+        height: 750px;
     }
     .image img {
         position: absolute;
@@ -55,5 +58,45 @@ h1 {
     }
 
 .large-image img {
-    width: 1200px;
+    width: 1500px;
+}
+
+
+@media (max-width: 1500px) {
+
+    .content {
+        width: 1148px;
+    }
+    .column {
+        width: 287px;
+    }
+    .image {
+        width: 287px;
+        height: 287px;
+    }
+    .image.large {
+        width: 574px;
+        height: 574px;
+    }
+
+}
+
+
+@media (max-width: 1150px) {
+
+    .content {
+        width: 760px;
+    }
+    .column {
+        width: 190px;
+    }
+    .image {
+        width: 190px;
+        height: 190px;
+    }
+    .image.large {
+        width: 380px;
+        height: 380px;
+    }
+
 }
