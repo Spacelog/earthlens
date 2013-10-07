@@ -3,3 +3,10 @@
 {% block extra_head %}
     <h1>FUCK YEAH SPACE</h1>
 {% endblock %}
+
+{% block content %}
+    <h2>SAY WAT</h2>
+    {% for image in images %}
+        {{ image.mission }}
+    {% endfor %}
+{% endblock %}
