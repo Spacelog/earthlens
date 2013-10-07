@@ -25,10 +25,10 @@
             <form action="{% url "image" image.pk %}" method="POST" class="rating">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
-                <input type="submit" class="rating awesome" name="awesome" value="Awesome (r)">
-                <input type="submit" class="rating good" name="good" value="Good (y)">
-                <input type="submit" class="rating neutral" name="neutral" value="Neutral (h)">
-                <input type="submit" class="rating bad" name="bad" value="Bad (n)">
+                <input type="submit" class="rating awesome" name="awesome" value="Awesome (r,1)">
+                <input type="submit" class="rating good" name="good" value="Good (y,2)">
+                <input type="submit" class="rating neutral" name="neutral" value="Neutral (h,3)">
+                <input type="submit" class="rating bad" name="bad" value="Bad (n,4)">
                 ID {{ image.pk }}
                 <a href="/logout/">Logout</a>
             </form>
