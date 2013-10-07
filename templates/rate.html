@@ -24,7 +24,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
                 <input type="submit" class="rating good" name="good" value="Good (y)">
-                <input type="submit" class="rating neutral" name="neutral" value="Skip (h)">
+                <input type="submit" class="rating neutral" name="neutral" value="Neutral (h)">
                 <input type="submit" class="rating bad" name="bad" value="Bad (n)">
                 ID {{ image.pk }}
                 <a href="/logout/">Logout</a>
