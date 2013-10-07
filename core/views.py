@@ -10,7 +10,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context["rows"] = self.make_rows(Image.objects.order_by("-rating")[:14])
+        context["rows"] = self.make_rows(Image.objects.filter(mission__code="SL2").order_by("-rating")[:14])
         return context
 
     def make_rows(self, images):

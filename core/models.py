@@ -66,6 +66,15 @@ class Image(models.Model):
     def get_large_url(self):
         return self.get_url("large")
 
+    def get_descriptive_date(self):
+        if self.date_start and self.date_end:
+            return "%s to %s" % (self.date_start, self.date_end)
+        elif self.date is not None:
+            return self.date
+        else:
+            return None
+
+
 
 class ImageFile(models.Model):
     """
