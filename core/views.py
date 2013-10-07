@@ -1,4 +1,6 @@
 from django.views.generic import TemplateView, DetailView
+from django.db.models import F
+from django.http import HttpResponseRedirect
 from core.models import Image
 
 class IndexView(TemplateView):
@@ -24,3 +26,21 @@ class ImageView(DetailView):
 
     template_name = "image.html"
     model = Image
+
+    def post(self, request, pk, **kwargs):
+        if "good" in self.request.POST:
+            rating = 1
+        elif "bad" in self.request.POST:
+            rating = -1
+        Image.objects.filter(pk=pk).update(rating=F("rating") + rating)
+        return HttpResponseRedirect(self.request.POST.get("next", "."))
+
+
+class RateView(TemplateView):
+
+    template_name = "rate.html"
+
+    def get_context_data(self):
+        return {
+            "image": Image.objects.filter(rating=0).order_by("?")[0],
+        }

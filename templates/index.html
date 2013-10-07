@@ -5,10 +5,10 @@
         {% if row|length == 5 %}
             <div class="row row-5">
                 <div class="column">
-                    {% include "_image_square.html" with image=row.0 %}
                     {% include "_image_square.html" with image=row.1 %}
+                    {% include "_image_square.html" with image=row.2 %}
                 </div>
-                {% include "_image_square.html" with image=row.2 extra_classes="large" %}
+                {% include "_image_square.html" with image=row.0 extra_classes="large" %}
                 <div class="column">
                     {% include "_image_square.html" with image=row.3 %}
                     {% include "_image_square.html" with image=row.4 %}

@@ -5,6 +5,7 @@
         <img src="{{ image.get_large_url }}">
         <form action="{% url "image" image.pk %}" method="POST">
             {% csrf_token %}
+            <input type="hidden" name="next" value="/rate/">
             <input type="submit" name="good" value="Good">
             <input type="submit" name="bad" value="Bad">
         </form>
