@@ -49,6 +49,7 @@ class Image(models.Model):
     altitude = models.IntegerField(null=True, blank=True)  # In metres
 
     rating = models.IntegerField(default=0, db_index=True)
+    votes = models.IntegerField(default=0, db_index=True)
 
     def __str__(self):
         return "%s-%s" % (self.mission.code, self.code)

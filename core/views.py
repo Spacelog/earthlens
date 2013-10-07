@@ -32,7 +32,12 @@ class ImageView(DetailView):
             rating = 1
         elif "bad" in self.request.POST:
             rating = -1
-        Image.objects.filter(pk=pk).update(rating=F("rating") + rating)
+        else:
+            rating = 0
+        Image.objects.filter(pk=pk).update(
+            rating=F("rating") + rating,
+            votes=F("votes") + 1,
+        )
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 
 
@@ -42,5 +47,6 @@ class RateView(TemplateView):
 
     def get_context_data(self):
         return {
-            "image": Image.objects.filter(rating=0).order_by("?")[0],
+            "image": Image.objects.extra(where=["votes = (select min(votes) from core_image)"]).order_by("?")[0],
+            "prev_image": Image.objects.get(pk=self.request.GET['prev']) if "prev" in self.request.GET else None,
         }

@@ -1,13 +1,36 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <script>
+        $(function () {
+            $("body").keydown(function (event) {
+                if (event.which == 89) {
+                    $("input[name=good]").click();
+                } else if (event.which == 78) {
+                    $("input[name=good]").click();
+                } else if (event.which == 72) {
+                    $("input[name=neutral]").click();
+                }
+            })
+        })
+    </script>
+{% endblock %}
+
 {% block content %}
     <div class="large-image">
         <img src="{{ image.get_large_url }}">
         <form action="{% url "image" image.pk %}" method="POST">
             {% csrf_token %}
-            <input type="hidden" name="next" value="/rate/">
-            <input type="submit" name="good" value="Good">
-            <input type="submit" name="bad" value="Bad">
+            <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
+            <input type="submit" name="good" value="Good (y)">
+            <input type="submit" name="neutral" value="Skip (h)">
+            <input type="submit" name="bad" value="Bad (n)">
+            ID {{ image.pk }}
         </form>
+        {% if prev_image %}
+            <div class="previous-image">
+                Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
