@@ -3,12 +3,38 @@
 {% block extra_head %}
     <script>
         var next_offset = {{ page_size }};
-        $(function () {
-            $(".load-more").click(function () {
-                $.get('{% url "index-ajax" %}?offset=' + next_offset, function(data) {   
+        var loading = false;
+
+        var load_more = function () {
+            // Make sure only one fetch runs at a time
+            if (loading) return;
+            loading = true;
+            $(".load-more").addClass("loading");
+            // Make the AJAX call
+            $.ajax({
+                url: '{% url "index-ajax" %}?offset=' + next_offset,
+                success: function(data) {   
                     $('.image-grid').append(data);
                     next_offset += {{ page_size }};
-                });
+                    loading = false;
+                    $(".load-more").removeClass("loading");
+                },
+                error: function () {
+                    // On error, disable load more/infinite scroll
+                    load_more = function () {};
+                    $(".load-more").hide();
+                    loading = false;
+                    $(".load-more").removeClass("loading");
+                }
+            });
+        }
+
+        $(function () {
+            $(".load-more").click(load_more);
+            $(window).scroll(function () {
+                if ((window.innerHeight + window.scrollY + 200) >= document.body.offsetHeight) {
+                    load_more();
+                }
             })
         })
     </script>

@@ -67,6 +67,9 @@ h1 {
     cursor: pointer;
     text-align: center;
 }
+    .load-more .loading {
+        color: red;
+    }
 
 /**** 1148px wide layout ****/
 

@@ -1,6 +1,6 @@
 from django.views.generic import TemplateView, DetailView
 from django.db.models import F
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from core.models import Image
 
 
@@ -14,6 +14,8 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         offset = int(self.request.GET.get("offset", 0))
         context["rows"] = self.make_rows(Image.objects.order_by("-rating", "-votes")[offset:offset+self.page_size])
+        if not context["rows"][0]:
+            raise Http404("No images left")
         context["page_size"] = self.page_size
         return context
 
