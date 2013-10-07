@@ -1,12 +1,25 @@
 {% extends "base.html" %}
 
-{% block extra_head %}
-    <h1>FUCK YEAH SPACE</h1>
-{% endblock %}
-
 {% block content %}
-    <h2>SAY WAT</h2>
-    {% for image in images %}
-        {{ image.mission }}
+    {% for row in rows %}
+        {% if row|length == 5 %}
+            <div class="row row-5">
+                <div class="column">
+                    {% include "_image_square.html" with image=row.0 %}
+                    {% include "_image_square.html" with image=row.1 %}
+                </div>
+                {% include "_image_square.html" with image=row.2 extra_classes="large" %}
+                <div class="column">
+                    {% include "_image_square.html" with image=row.3 %}
+                    {% include "_image_square.html" with image=row.4 %}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                {% for image in row %}
+                    {% include "_image_square.html" %}
+                {% endfor %}
+            </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}

@@ -95,6 +95,14 @@ class Command(BaseCommand):
                     except TypeError:
                         print 'date is funked up'
                         pass
+                elif time_string.startswith("(HH"):
+                    try:
+                        details['date'] = datetime.datetime.strptime(date_string, "%Y%m%d")
+                        details['date_start'] = details['date']
+                        details['date_end'] = details['date'] + details['date'].replace(hour=23, minute=59, second=59)
+                    except TypeError:
+                        print 'date is funked up'
+                        pass
                 else:
                     details['date'] = datetime.datetime.strptime(date_string + "-" + time_string, "%Y%m%d-%H%M%S")
             last = line

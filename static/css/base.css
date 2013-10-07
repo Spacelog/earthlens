@@ -3,3 +3,57 @@ body {
     font-family: sans-serif;
     color: white;
 }
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    letter-spacing: 0.3em;
+    text-transform: lowercase;
+    font-size: 200%;
+    text-align: center;
+    margin: 1em 0 1em 0;
+}
+    h1 a {
+        color: inherit;
+    }
+    h1 i {
+        color: #777;
+    }
+
+.content {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    overflow: hidden;
+}
+
+.column {
+    float: left;
+    width: 300px;
+    overflow: hidden;
+}
+
+.image {
+    float: left;
+    position: relative;
+    width: 298px;
+    height: 298px;
+    border: 1px solid black;
+}
+    .image.large {
+        width: 598px;
+        height: 598px;
+    }
+    .image img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+.large-image img {
+    width: 1200px;
+}

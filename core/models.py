@@ -54,7 +54,16 @@ class Image(models.Model):
         return "%s-%s" % (self.mission.code, self.code)
 
     def get_url(self, size="original"):
-        return "/static/photos/%s/%s.jpg" % (size, self.code)
+        return "/static/missions/%s/%s/%s.jpg" % (self.mission.code, size, self.code)
+
+    def get_square_url(self):
+        return self.get_url("square")
+
+    def get_original_url(self):
+        return self.get_url("original")
+
+    def get_large_url(self):
+        return self.get_url("large")
 
 
 class ImageFile(models.Model):
