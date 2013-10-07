@@ -17,21 +17,25 @@
 {% endblock %}
 
 {% block content %}
-    <div class="large-image">
-        <img src="{{ image.get_large_url }}">
-        <form action="{% url "image" image.pk %}" method="POST" class="rating">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
-            <input type="submit" class="rating good" name="good" value="Good (y)">
-            <input type="submit" class="rating neutral" name="neutral" value="Skip (h)">
-            <input type="submit" class="rating bad" name="bad" value="Bad (n)">
-            ID {{ image.pk }}
-            <a href="/logout/">Logout</a>
-        </form>
-        {% if prev_image %}
-            <div class="previous-image">
-                Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
-            </div>
+    <div class="rate">
+        {% if image %}
+            <img src="{{ image.get_large_url }}" width="750">
+            <form action="{% url "image" image.pk %}" method="POST" class="rating">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
+                <input type="submit" class="rating good" name="good" value="Good (y)">
+                <input type="submit" class="rating neutral" name="neutral" value="Skip (h)">
+                <input type="submit" class="rating bad" name="bad" value="Bad (n)">
+                ID {{ image.pk }}
+                <a href="/logout/">Logout</a>
+            </form>
+            {% if prev_image %}
+                <div class="previous-image">
+                    Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
+                </div>
+            {% endif %}
+        {% else %}
+            All rated! You're amazing!
         {% endif %}
     </div>
 {% endblock %}
