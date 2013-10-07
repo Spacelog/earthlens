@@ -4,7 +4,7 @@ import os
 import os.path
 import sys
 
-SIZES = {'square': ['-resize', '720x720', '-gravity', 'Center', '-crop', '720x720'],
+SIZES = {'square': ['-resize', '720x720^', '+repage', '-gravity', 'Center', '-crop', '720x720+0+0'],
          'large': ['-resize', '1800x1800'],
          'original': []}
 
