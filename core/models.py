@@ -48,8 +48,13 @@ class Image(models.Model):
     sun_elevation = models.IntegerField(null=True, blank=True)  # Degrees
     altitude = models.IntegerField(null=True, blank=True)  # In metres
 
+    rating = models.IntegerField(default=0, db_index=True)
+
     def __str__(self):
         return "%s-%s" % (self.mission.code, self.code)
+
+    def get_url(self, size="original"):
+        return "/static/photos/%s/%s.jpg" % (size, self.code)
 
 
 class ImageFile(models.Model):
