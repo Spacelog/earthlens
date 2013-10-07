@@ -89,6 +89,9 @@ h1 {
         width: 574px;
         height: 574px;
     }
+    .large-image img {
+        width: 1148px;
+    }
 
 }
 
@@ -109,6 +112,9 @@ h1 {
     .image.large {
         width: 380px;
         height: 380px;
+    }
+    .large-image img {
+        width: 760px;
     }
 
 }
