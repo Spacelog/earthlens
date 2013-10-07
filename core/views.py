@@ -3,14 +3,18 @@ from django.db.models import F
 from django.http import HttpResponseRedirect
 from core.models import Image
 
+
 class IndexView(TemplateView):
 
     template_name = "index.html"
     row_pattern = [5, 4]
+    page_size = 18
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context["rows"] = self.make_rows(Image.objects.filter(mission__code="SL2").order_by("-rating")[:14])
+        offset = int(self.request.GET.get("offset", 0))
+        context["rows"] = self.make_rows(Image.objects.order_by("-rating", "-votes")[offset:offset+self.page_size])
+        context["page_size"] = self.page_size
         return context
 
     def make_rows(self, images):
@@ -20,6 +24,11 @@ class IndexView(TemplateView):
                 rows.append([])
             rows[-1].append(image)
         return rows
+
+
+class IndexAjaxView(IndexView):
+
+    template_name = "_index_rows.html"
 
 
 class ImageView(DetailView):

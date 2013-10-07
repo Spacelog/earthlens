@@ -1,25 +1,22 @@
 {% extends "base.html" %}
 
+{% block extra_head %}
+    <script>
+        var next_offset = {{ page_size }};
+        $(function () {
+            $(".load-more").click(function () {
+                $.get('{% url "index-ajax" %}?offset=' + next_offset, function(data) {   
+                    $('.image-grid').append(data);
+                    next_offset += {{ page_size }};
+                });
+            })
+        })
+    </script>
+{% endblock %}
+
 {% block content %}
-    {% for row in rows %}
-        {% if row|length == 5 %}
-            <div class="row row-5">
-                <div class="column">
-                    {% include "_image_square.html" with image=row.1 %}
-                    {% include "_image_square.html" with image=row.2 %}
-                </div>
-                {% include "_image_square.html" with image=row.0 extra_classes="large" %}
-                <div class="column">
-                    {% include "_image_square.html" with image=row.3 %}
-                    {% include "_image_square.html" with image=row.4 %}
-                </div>
-            </div>
-        {% else %}
-            <div class="row">
-                {% for image in row %}
-                    {% include "_image_square.html" %}
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endfor %}
+    <div class="image-grid">
+        {% include "_index_rows.html" %}
+    </div>
+    <p class="load-more">Load more</p>
 {% endblock %}

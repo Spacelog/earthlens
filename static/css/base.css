@@ -61,6 +61,14 @@ h1 {
     width: 1500px;
 }
 
+.load-more {
+    margin: 1em 0;
+    font-size: 1.3em;
+    cursor: pointer;
+    text-align: center;
+}
+
+/**** 1148px wide layout ****/
 
 @media (max-width: 1500px) {
 
@@ -81,6 +89,7 @@ h1 {
 
 }
 
+/**** 760px wide layout ****/
 
 @media (max-width: 1150px) {
 
