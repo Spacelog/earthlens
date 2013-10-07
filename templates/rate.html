@@ -4,13 +4,16 @@
     <script>
         $(function () {
             $("body").keydown(function (event) {
-                if (event.which == 89) {
+                if (event.which == 89 || event.which = 50) {
                     $("input[name=good]").click();
-                } else if (event.which == 78) {
-                    $("input[name=good]").click();
-                } else if (event.which == 72) {
+                } else if (event.which == 78 || event.which = 52) {
+                    $("input[name=bad]").click();
+                } else if (event.which == 72 || event.which = 51) {
                     $("input[name=neutral]").click();
+                } else if (event.which == 82 || event.which = 49) {
+                    $("input[name=awesome]").click();
                 }
+                console.log(event.which)
             })
         })
     </script>
@@ -23,6 +26,7 @@
             <form action="{% url "image" image.pk %}" method="POST" class="rating">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
+                <input type="submit" class="rating awesome" name="awesome" value="Awesome (r)">
                 <input type="submit" class="rating good" name="good" value="Good (y)">
                 <input type="submit" class="rating neutral" name="neutral" value="Neutral (h)">
                 <input type="submit" class="rating bad" name="bad" value="Bad (n)">

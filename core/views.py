@@ -43,6 +43,8 @@ class ImageView(DetailView):
             rating = 1
         elif "bad" in self.request.POST:
             rating = -1
+        elif "awesome" in self.request.POST:
+            rating = 3
         else:
             rating = 0
 
