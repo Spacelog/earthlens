@@ -19,12 +19,12 @@
 {% block content %}
     <div class="large-image">
         <img src="{{ image.get_large_url }}">
-        <form action="{% url "image" image.pk %}" method="POST">
+        <form action="{% url "image" image.pk %}" method="POST" class="rating">
             {% csrf_token %}
             <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
-            <input type="submit" name="good" value="Good (y)">
-            <input type="submit" name="neutral" value="Skip (h)">
-            <input type="submit" name="bad" value="Bad (n)">
+            <input type="submit" class="rating good" name="good" value="Good (y)">
+            <input type="submit" class="rating neutral" name="neutral" value="Skip (h)">
+            <input type="submit" class="rating bad" name="bad" value="Bad (n)">
             ID {{ image.pk }}
         </form>
         {% if prev_image %}

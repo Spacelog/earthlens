@@ -72,13 +72,33 @@ h1 {
 }
 
 .load-more {
-    margin: 1em 0;
+    margin: 2em 0;
     font-size: 1.3em;
     cursor: pointer;
     text-align: center;
 }
     .load-more .loading {
         color: red;
+    }
+
+form.rating {
+    margin: 1em 0;
+}
+
+input.rating {
+    padding: 10px 20px;
+    font-size: 1.3em;
+    border-radius: 3px;
+    border: 1px solid #1A6226;
+    background-color: #3C8749;
+}
+    input.rating.neutral {
+        border: 1px solid #B5AE2E;
+        background-color: #B7BE1C;
+    }
+    input.rating.bad {
+        border: 1px solid #4C1C1D;
+        background-color: #B2221B;
     }
 
 /**** 1148px wide layout ****/
