@@ -1,3 +1,4 @@
+import os
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.conf.urls.static import static
@@ -17,4 +18,6 @@ urlpatterns = patterns('',
     url(r'^rate/$', login_required(RateView.as_view()), name='rate'),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, {"next_page": "/" }, name='logout'),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+) + \
+  static("/static/admin/", document_root=os.path.join(os.path.dirname(admin.__file__), "static/admin/")) + \
+  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
