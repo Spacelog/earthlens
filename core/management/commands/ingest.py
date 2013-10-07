@@ -55,7 +55,11 @@ class Command(BaseCommand):
                 details['film_text'] = line
                 details['film_code'] = line.split(":")[0].strip()
             elif line.lower().startswith("percentage of cloud cover"):
-                details['cloud_cover_text'] = int(line.split(":", 1)[1].split()[0].strip())
+                try:
+                    details['cloud_cover_text'] = int(line.split(":", 1)[1].split()[0].strip())
+                except ValueError:
+                    print "too much computer in cloude"
+                    pass
             elif line.lower().startswith("nadir point latitude"):
                 try:
                     details['nadir_latitude'] = float(line.split(":", 1)[1].split()[0].strip().strip(","))
@@ -107,6 +111,9 @@ class Command(BaseCommand):
                     details['date'] = datetime.datetime.strptime(date_string + "-" + time_string, "%Y%m%d-%H%M%S")
             last = line
         # Make the models
+        if "mission" not in details:
+            print "mission say wat run into a problem"
+            return
         mission = Mission.objects.get_or_create(code=details['mission'])[0]
         details['mission'] = mission
         image = Image.objects.get_or_create(**details)
