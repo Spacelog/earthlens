@@ -55,6 +55,16 @@ h1 {
         position: absolute;
         width: 100%;
         height: 100%;
+        z-index: 1;
+    }
+    .image span {
+        position: absolute;
+        bottom: 0;
+        z-index: 3;
+        background-color:  rgba(0, 0, 0, 0.7);
+        text-align: center;
+        padding: 10px 10px 10px 10px;
+        width: 100%;
     }
 
 .large-image img {
