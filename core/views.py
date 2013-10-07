@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, DetailView
 from django.db.models import F
 from django.http import HttpResponseRedirect, Http404
-from core.models import Image
+from core.models import Image, ImageVote
 
 
 class IndexView(TemplateView):
@@ -45,10 +45,20 @@ class ImageView(DetailView):
             rating = -1
         else:
             rating = 0
-        Image.objects.filter(pk=pk).update(
-            rating=F("rating") + rating,
-            votes=F("votes") + 1,
-        )
+
+        try:
+            vote = ImageVote.objects.get(user=request.user, image__pk=pk)
+        except ImageVote.DoesNotExist:
+            Image.objects.filter(pk=pk).update(
+                rating = F("rating") + rating,
+                votes = F("votes") + 1,
+            )
+            ImageVote.objects.create(user=request.user, image_id=pk, vote=rating)
+        else:
+            Image.objects.filter(pk=pk).update(
+                rating = F("rating") + (rating - vote.vote),
+            )
+
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 
 

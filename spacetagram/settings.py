@@ -138,6 +138,9 @@ LOGGING = {
     }
 }
 
+LOGIN_REDIRECT_URL = "/rate/"
+LOGIN_URL = "/login/"
+
 try:
     from local_settings import *
 except ImportError:

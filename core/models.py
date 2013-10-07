@@ -52,7 +52,7 @@ class Image(models.Model):
     votes = models.IntegerField(default=0, db_index=True)
 
     def __str__(self):
-        return "%s-%s" % (self.mission.code, self.code)
+        return self.code
 
     def get_url(self, size="original"):
         return "/static/missions/%s/%s/%s.jpg" % (self.mission.code, size, self.code)
@@ -75,16 +75,16 @@ class Image(models.Model):
             return None
 
 
-
-class ImageFile(models.Model):
+class ImageVote(models.Model):
     """
-    A particular file and size of an image
+    Stores a user's vote against an image.
     """
 
-    image = models.ForeignKey(Image)
-    file = models.FileField(upload_to="image_files")
-    width = models.IntegerField()
-    height = models.IntegerField()
+    user = models.ForeignKey("auth.User", related_name="vote_objects")
+    image = models.ForeignKey(Image, related_name="vote_objects")
+    vote = models.IntegerField()
 
-    def __str__(self):
-        return "%s (%sx%s)" % (self.file, self.width, self.height)
+    class Meta:
+        unique_together = [
+            ["user", "image"],
+        ]

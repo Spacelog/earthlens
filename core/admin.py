@@ -1,5 +1,5 @@
 from django.contrib.admin import site
-from core.models import Mission, Image, ImageFile
+from core.models import Mission, Image, ImageVote
 
 site.register(
     Mission,
@@ -12,6 +12,6 @@ site.register(
 )
 
 site.register(
-    ImageFile,
-    list_display = ["id", "file", "width", "height"],
+    ImageVote,
+    list_display = ["id", "image", "user", "vote"],
 )

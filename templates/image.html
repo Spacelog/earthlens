@@ -12,10 +12,5 @@
             <li>{{ image.description }}</li>
             <li>Taken with a {{ image.camera_model_text }}, {{ image.focal_length_text }}, orbiting at {{ image.nadir_latitude}} {{ image.nadir_longitude }} at {{ image.tilt_text}}</li>
         </ul>
-        <form action="{% url "image" image.pk %}" method="POST">
-            {% csrf_token %}
-            <input type="submit" name="good" value="Good">
-            <input type="submit" name="bad" value="Bad">
-        </form>
     </div>
 {% endblock %}
