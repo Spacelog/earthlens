@@ -148,3 +148,27 @@ input.rating {
     }
 
 }
+
+/**** 360px wide layout ****/
+
+@media (max-width: 760px) {
+
+    .content {
+        width: 360px;
+    }
+    .column {
+        width: 360px;
+    }
+    .image {
+        width: 360px;
+        height: 360px;
+    }
+    .image.large {
+        width: 360px;
+        height: 360px;
+    }
+    .large-image img {
+        width: 360px;
+    }
+
+}
