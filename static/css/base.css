@@ -89,16 +89,17 @@ input.rating {
     padding: 10px 20px;
     font-size: 1.3em;
     border-radius: 3px;
-    border: 1px solid #1A6226;
+    border: 0;
     background-color: #3C8749;
 }
     input.rating.neutral {
-        border: 1px solid #B5AE2E;
         background-color: #B7BE1C;
     }
     input.rating.bad {
-        border: 1px solid #4C1C1D;
         background-color: #B2221B;
+    }
+    input.rating.awesome {
+        background-color: #2E4D87;
     }
 
 /**** 1148px wide layout ****/
