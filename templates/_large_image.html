@@ -1,11 +1,8 @@
 <div class="large-image">
-    <img src="{{ image.get_large_url }}">
+    <a href="{{ image.get_original_url }}" target="_blank" class="original"><img src="{{ image.get_large_url }}"></a>
     <div class="meta">
         <h2>{{ image.geographic_name|title }}</h2>
         <ul>
-            {% if image.get_descriptive_date != None %}
-                <li>Date: {{ image.get_descriptive_date }}</li>
-            {% endif %}
             <li>
                 {% if image.get_descriptive_date %}
                     {{ image.get_descriptive_date }}. 
