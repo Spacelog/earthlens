@@ -50,6 +50,12 @@ class ImageView(DetailView):
     template_name = "image.html"
     model = Image
 
+    def get_template_names(self):
+        if self.request.GET.get("ajax", False):
+            return ["_large_image.html"]
+        else:
+            return ["image.html"]
+
     def post(self, request, pk, **kwargs):
         if "good" in self.request.POST:
             rating = 1

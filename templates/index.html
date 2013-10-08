@@ -42,6 +42,15 @@
             })
         }
 
+        var open_lightbox = function () {
+            $("body").append("<div class='lightbox'></div>");
+            $(".lightbox").click(close_lightbox);
+        }
+
+        var close_lightbox = function () {
+            $(".lightbox").remove();
+        }
+
         $(function () {
             // Load more manual
             $(".load-more").click(load_more);
@@ -53,6 +62,26 @@
             })
             // Slidy description panes
             make_it_slidy();
+            // Override real linkage into javascript ballooniness
+            $(document).on("click", ".image", function (ev) {
+                // Open lightbox
+                open_lightbox();
+                $.ajax({
+                    url: $(this).find("a").attr("href") + "?ajax=1",
+                    success: function(data) {   
+                        $(".lightbox").html(data);
+                    },
+                });
+                // Don't cascade
+                ev.preventDefault();
+                return false;
+            })
+            // Escape closes lightbox
+            $("body").keydown(function (event) {
+                if (event.which == 27) {
+                    close_lightbox();
+                }
+            });
         })
     </script>
 {% endblock %}
