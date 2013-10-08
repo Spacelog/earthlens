@@ -30,11 +30,20 @@
         }
 
         $(function () {
+            // Load more manual
             $(".load-more").click(load_more);
+            // Load more auto
             $(window).scroll(function () {
                 if ((window.innerHeight + window.scrollY + 200) >= document.body.offsetHeight) {
                     load_more();
                 }
+            })
+            // Slidy description panes
+            $(".image span").css({bottom: -50});
+            $(".image").hover(function () {
+                $(this).find("span").animate({bottom: 0});
+            }, function () {
+                $(this).find("span").animate({bottom: -50});
             })
         })
     </script>

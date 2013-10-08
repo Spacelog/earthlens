@@ -2,5 +2,5 @@
     <a href="{% url "image" image.pk %}">
         <img src="{{ image.get_square_url }}">
     </a>
-    <span>{{ image.geographic_name|title }}</span>
+    <span>{{ image.geographic_name|default:"Unknown"|title }}</span>
 </p>

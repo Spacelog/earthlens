@@ -40,6 +40,7 @@ h1 {
 .image {
     float: left;
     position: relative;
+    overflow: hidden;
     width: 375px;
     height: 375px;
     border: 1px solid black;
@@ -103,7 +104,7 @@ input.rating {
     }
 
 .rate img {
-    width: 100%;
+    max-width: 100%;
 }
 
 /**** 1148px wide layout ****/
