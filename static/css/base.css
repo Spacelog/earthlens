@@ -121,8 +121,13 @@ ol li {
 }
     .large-image .meta {
         text-align: left;
+        padding: 0 0 1.5em 0;
     }
     .large-image .edit-link {
+        float: right;
+        margin: 0.7em 1em 0.7em -0.3em;
+    }
+    .large-image .twitter-share-button {
         float: right;
         margin: 0.7em 1em 0.7em -0.3em;
     }
@@ -132,11 +137,11 @@ ol li {
     }
     .large-image h2 {
         font-size: 140%;
-        margin: 0.5em 0 0.5em 1em;
+        margin: 0.5em 0 0.5em 2.7em;
     }
     .large-image li {
         font-size: 90%;
-        margin: 0.3em 0 0.6em 1.6em;
+        margin: 0.3em 0 0.6em 4em;
     }
     .large-image a {
         color: inherit;

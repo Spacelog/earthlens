@@ -9,6 +9,7 @@
         <img src="{{ image.get_large_url }}">
     </a>
     <div class="meta">
+        <a href="https://twitter.com/share?url=http://earthlens.org{{ image.get_absolute_url }}&amp;text=Check+out+this+great+picture+of+Earth!&amp;via=earth_lens&amp;related=spacelog" data-count="none" class="twitter-share-button">Tweet</a>
         {% if user %}
             <a class="edit-link" href="/rate/?image={{ image.pk }}">Rate</a>
             <a class="edit-link" href="/tag/?image={{ image.pk }}">Tag</a>
@@ -28,12 +29,13 @@
 </div>
 <script>
     $(".large-image .meta a").click(function (ev) {
-        document.location.href = $(this).attr("href");
-    }
+        document.location.href = this.href;
+    })
     $(".large-image .meta").click(function (ev) {
         $(".more").fadeToggle("fast");
         ev.preventDefault();
         return false;
     })
     $(".large-image .more").hide();
+    twttr.widgets.load();
 </script>
