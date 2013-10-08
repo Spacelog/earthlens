@@ -5,13 +5,12 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
 from django.contrib import admin
-from core.views import IndexView, IndexAjaxView, ImageView, RateView
+from core.views import IndexView, ImageView, RateView
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', IndexView.as_view(), name='index'),
-    url(r'^ajax/more/$', IndexAjaxView.as_view(), name='index-ajax'),
     url(r'^image/(?P<pk>\d+)/$', ImageView.as_view(), name='image'),
     url(r'^admin/', include(admin.site.urls)),
 

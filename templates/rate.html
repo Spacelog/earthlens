@@ -21,7 +21,7 @@
 {% block content %}
     <div class="rate">
         {% if image %}
-            <img src="{{ image.get_large_url }}" width="750">
+            <img src="{{ image.get_large_url }}">
             <form action="{% url "image" image.pk %}" method="POST" class="rating">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">

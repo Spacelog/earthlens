@@ -102,6 +102,10 @@ input.rating {
         background-color: #2E4D87;
     }
 
+.rate img {
+    width: 100%;
+}
+
 /**** 1148px wide layout ****/
 
 @media (max-width: 1500px) {

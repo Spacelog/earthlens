@@ -6,9 +6,14 @@ from core.models import Image, ImageVote
 
 class IndexView(TemplateView):
 
-    template_name = "index.html"
     row_pattern = [5, 4]
     page_size = 18
+
+    def get_template_names(self):
+        if self.request.GET.get("offset", 0):
+            return ["_index_rows.html"]
+        else:
+            return ["index.html"]
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
@@ -26,11 +31,6 @@ class IndexView(TemplateView):
                 rows.append([])
             rows[-1].append(image)
         return rows
-
-
-class IndexAjaxView(IndexView):
-
-    template_name = "_index_rows.html"
 
 
 class ImageView(DetailView):

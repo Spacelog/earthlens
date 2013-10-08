@@ -12,7 +12,7 @@
             $(".load-more").addClass("loading");
             // Make the AJAX call
             $.ajax({
-                url: '{% url "index-ajax" %}?offset=' + next_offset,
+                url: '.?offset=' + next_offset,
                 success: function(data) {   
                     $('.image-grid').append(data);
                     next_offset += {{ page_size }};
