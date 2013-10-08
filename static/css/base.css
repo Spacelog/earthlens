@@ -149,13 +149,25 @@ input.rating {
     }
     .lightbox .large-image .prev-arrow {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: 40%;
+        left: 10px;
+        width: 29px;
+        height: 126px;
+        background-image: url(../images/arrow_left_off.png);
+    }
+    .lightbox .large-image .prev-arrow:hover {
+        background-image: url(../images/arrow_left.png);
     }
     .lightbox .large-image .next-arrow {
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 40%;
+        right: 10px;
+        width: 29px;
+        height: 126px;
+        background-image: url(../images/arrow_right_off.png);
+    }
+    .lightbox .large-image .next-arrow:hover {
+        background-image: url(../images/arrow_right.png);
     }
 
 /**** 1148px wide layout ****/
