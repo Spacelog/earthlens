@@ -122,6 +122,10 @@ ol li {
     .large-image .meta {
         text-align: left;
     }
+    .large-image .edit-link {
+        float: right;
+        margin: 0.7em 1em 0.7em -0.3em;
+    }
     .large-image img {
         max-width: 100%;
         cursor: pointer;

@@ -113,10 +113,13 @@ class RateView(TemplateView):
     template_name = "rate.html"
 
     def get_context_data(self):
-        try:
-            image = Image.objects.exclude(vote_objects__user=self.request.user).order_by("?")[0]
-        except IndexError:
-            return {"image": None}
+        if "image" in self.request.GET:
+            image = Image.objects.get(pk=self.request.GET['image'])
+        else:
+            try:
+                image = Image.objects.exclude(vote_objects__user=self.request.user).order_by("?")[0]
+            except IndexError:
+                return {"image": None}
         return {
             "image": image,
             "prev_image": Image.objects.get(pk=self.request.GET['prev']) if "prev" in self.request.GET else None,
@@ -129,10 +132,13 @@ class TagView(TemplateView):
     model = Image
 
     def get_context_data(self):
-        try:
-            image = Image.objects.exclude(tag_objects__user=self.request.user).order_by("?")[0]
-        except IndexError:
-            return {"image": None}
+        if "image" in self.request.GET:
+            image = Image.objects.get(pk=self.request.GET['image'])
+        else:
+            try:
+                image = Image.objects.exclude(tag_objects__user=self.request.user).order_by("?")[0]
+            except IndexError:
+                return {"image": None}
         return {
             "tags": Tag.objects.all(),
             "image": image,

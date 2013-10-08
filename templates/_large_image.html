@@ -9,6 +9,10 @@
         <img src="{{ image.get_large_url }}">
     </a>
     <div class="meta">
+        {% if user %}
+            <a class="edit-link" href="/rate/?image={{ image.pk }}">Rate</a>
+            <a class="edit-link" href="/tag/?image={{ image.pk }}">Tag</a>
+        {% endif %}
         <h2>{{ image.geographic_name|title }}</h2>
         <ul>
             <li>
@@ -16,7 +20,6 @@
                     {{ image.get_descriptive_date }}. 
                 {% endif %}
                 Taken during <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>.
-                <a href="#" class="more-detail">&raquo; More Detail</a>
             </li>
             <li class="more">{{ image.description }}</li>
             <li class="more">Taken with a {{ image.camera_model_text }}, {{ image.focal_length_text }}, orbiting at {{ image.nadir_latitude}} {{ image.nadir_longitude }} at {{ image.tilt_text}}</li>
@@ -24,7 +27,10 @@
     </div>
 </div>
 <script>
-    $(".large-image .more-detail").click(function (ev) {
+    $(".large-image .meta a").click(function (ev) {
+        document.location.href = $(this).attr("href");
+    }
+    $(".large-image .meta").click(function (ev) {
         $(".more").fadeToggle("fast");
         ev.preventDefault();
         return false;

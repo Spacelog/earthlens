@@ -55,17 +55,20 @@ class Image(models.Model):
     def __str__(self):
         return self.code
 
-    def get_url(self, size="original"):
+    def get_absolute_url(self):
+        return "/image/%s/" % self.pk
+
+    def get_image_url(self, size="original"):
         return "%s%s/%s/%s.jpg" % (settings.IMAGE_BASE_URL, self.mission.code, size, self.code)
 
     def get_square_url(self):
-        return self.get_url("square")
+        return self.get_image_url("square")
 
     def get_original_url(self):
-        return self.get_url("original")
+        return self.get_image_url("original")
 
     def get_large_url(self):
-        return self.get_url("large")
+        return self.get_image_url("large")
 
     def get_descriptive_date(self):
         if self.date_start and self.date_end:
