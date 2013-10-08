@@ -43,6 +43,7 @@
         }
 
         var open_lightbox = function () {
+            $(".lightbox").remove();
             $("body").append("<div class='lightbox'></div>");
             $(".lightbox").click(close_lightbox);
         }
@@ -63,11 +64,15 @@
             // Slidy description panes
             make_it_slidy();
             // Override real linkage into javascript ballooniness
-            $(document).on("click", ".image", function (ev) {
+            $(document).on("click", ".image, .next-arrow, .prev-arrow", function (ev) {
                 // Open lightbox
                 open_lightbox();
+                url = $(this).attr("href");
+                if (!url) {
+                    url = $(this).find("a").attr("href");
+                }
                 $.ajax({
-                    url: $(this).find("a").attr("href") + "?ajax=1",
+                    url: url + "&ajax=1",
                     success: function(data) {   
                         $(".lightbox").html(data);
                     },
@@ -80,7 +85,12 @@
             $("body").keydown(function (event) {
                 if (event.which == 27) {
                     close_lightbox();
+                } else if (event.which == 37) {
+                    $(".prev-arrow").click();
+                } else if (event.which == 39) {
+                    $(".next-arrow").click();
                 }
+                console.log(event.which)
             });
         })
     </script>

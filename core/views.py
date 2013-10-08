@@ -4,10 +4,20 @@ from django.http import HttpResponseRedirect, Http404
 from core.models import Image, ImageVote
 
 
+def series_queryset(series):
+    if series == "index":
+        return Image.objects.order_by("-rating", "-votes", "id")
+    elif series.startswith("m-"):
+        return Image.objects.filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
+    else:
+        raise ValueError("Unknown series %s" % series)
+
+
 class IndexView(TemplateView):
 
     row_pattern = [5, 4]
     page_size = 18
+    series = "index"
 
     def get_template_names(self):
         if self.request.GET.get("offset", 0):
@@ -16,15 +26,19 @@ class IndexView(TemplateView):
             return ["index.html"]
 
     def get_queryset(self):
-        return Image.objects.order_by("-rating", "-votes", "id")
+        return series_queryset(self.series)
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         offset = int(self.request.GET.get("offset", 0))
-        context["rows"] = self.make_rows(self.get_queryset()[offset:offset+self.page_size])
+        images = list(self.get_queryset()[offset:offset+self.page_size])
+        for i, image in enumerate(images):
+            image.index = offset + i
+        context["rows"] = self.make_rows(images)
         if not context["rows"][0]:
             raise Http404("No images left")
         context["page_size"] = self.page_size
+        context["series"] = self.series
         return context
 
     def make_rows(self, images):
@@ -38,11 +52,9 @@ class IndexView(TemplateView):
 
 class MissionView(IndexView):
 
-    row_pattern = [5, 4]
-    page_size = 18
-
-    def get_queryset(self):
-        return Image.objects.filter(mission__code__iexact=self.kwargs['mission']).order_by("-rating", "-votes", "id")
+    @property
+    def series(self):
+        return "m-" + self.kwargs['mission']
 
 
 class ImageView(DetailView):
@@ -55,6 +67,19 @@ class ImageView(DetailView):
             return ["_large_image.html"]
         else:
             return ["image.html"]
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ImageView, self).get_context_data(*args, **kwargs)
+        series = self.request.GET.get('series', None)
+        index = int(self.request.GET.get("index", None))
+        if series and index is not None:
+            # This is part of a series; make previous/next links
+            queryset = series_queryset(series)
+            if index > 0:
+                context['previous_image_url'] = "/image/%s/?ajax=1&series=%s&index=%s" % (queryset[index - 1].id, series, index - 1)
+            if index < queryset.count() - 1:
+                context['next_image_url'] = "/image/%s/?ajax=1&series=%s&index=%s" % (queryset[index + 1].id, series, index + 1)
+        return context
 
     def post(self, request, pk, **kwargs):
         if "good" in self.request.POST:

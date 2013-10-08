@@ -1,5 +1,5 @@
 <p class="image {{ extra_classes }}">
-    <a href="{% url "image" image.pk %}">
+    <a href="{% url "image" image.pk %}?series={{ series }}&amp;index={{ image.index }}">
         <img src="{{ image.get_square_url }}">
     </a>
     <span>{{ image.geographic_name|default:"Unknown"|title }}</span>
