@@ -1,12 +1,12 @@
 <div class="large-image">
+    {% if previous_image_url %}
+        <a href="{{ previous_image_url }}" class="prev-arrow"></a>
+    {% endif %}
+    {% if next_image_url %}
+        <a href="{{ next_image_url }}" class="next-arrow"></a>
+    {% endif %}
     <a href="{{ image.get_original_url }}" target="_blank" class="original">
-        {% if previous_image_url %}
-            <a href="{{ previous_image_url }}" class="prev-arrow"></a>
-        {% endif %}
         <img src="{{ image.get_large_url }}">
-        {% if next_image_url %}
-            <a href="{{ next_image_url }}" class="next-arrow"></a>
-        {% endif %}
     </a>
     <div class="meta">
         <h2>{{ image.geographic_name|title }}</h2>
