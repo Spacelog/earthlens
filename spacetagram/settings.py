@@ -141,6 +141,8 @@ LOGGING = {
 LOGIN_REDIRECT_URL = "/rate/"
 LOGIN_URL = "/login/"
 
+IMAGE_BASE_URL = "/static/missions/"
+
 try:
     from local_settings import *
 except ImportError:

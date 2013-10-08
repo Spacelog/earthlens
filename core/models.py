@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Mission(models.Model):
@@ -55,7 +56,7 @@ class Image(models.Model):
         return self.code
 
     def get_url(self, size="original"):
-        return "/static/missions/%s/%s/%s.jpg" % (self.mission.code, size, self.code)
+        return "%s%s/%s/%s.jpg" % (settings.IMAGE_BASE_URL, self.mission.code, size, self.code)
 
     def get_square_url(self):
         return self.get_url("square")
