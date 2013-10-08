@@ -17,7 +17,7 @@ DATABASES = {
         'NAME': 'spacetagram',
         'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': '',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
