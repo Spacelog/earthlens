@@ -20,7 +20,7 @@
                 {% if image.get_descriptive_date %}
                     {{ image.get_descriptive_date }}. 
                 {% endif %}
-                Taken during <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>.
+                Taken by the crew of <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>.
             </li>
             <li class="more">{{ image.description }}</li>
             <li class="more">Taken with a {{ image.camera_model_text }}, {{ image.focal_length_text }}, orbiting at {{ image.nadir_latitude }} {{ image.nadir_longitude }} at {{ image.tilt_text}}</li>
