@@ -15,10 +15,13 @@ class IndexView(TemplateView):
         else:
             return ["index.html"]
 
+    def get_queryset(self):
+        return Image.objects.order_by("-rating", "-votes", "id")
+
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         offset = int(self.request.GET.get("offset", 0))
-        context["rows"] = self.make_rows(Image.objects.order_by("-rating", "-votes")[offset:offset+self.page_size])
+        context["rows"] = self.make_rows(self.get_queryset()[offset:offset+self.page_size])
         if not context["rows"][0]:
             raise Http404("No images left")
         context["page_size"] = self.page_size
@@ -31,6 +34,15 @@ class IndexView(TemplateView):
                 rows.append([])
             rows[-1].append(image)
         return rows
+
+
+class MissionView(IndexView):
+
+    row_pattern = [5, 4]
+    page_size = 18
+
+    def get_queryset(self):
+        return Image.objects.filter(mission__code__iexact=self.kwargs['mission']).order_by("-rating", "-votes", "id")
 
 
 class ImageView(DetailView):
