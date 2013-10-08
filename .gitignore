@@ -2,3 +2,4 @@
 static/missions/
 env
 .vagrant
+local_settings.py
