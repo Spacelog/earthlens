@@ -22,10 +22,47 @@ h1 {
         color: #777;
     }
 
+
+.header {
+    width: 1500px;
+    margin: 1em auto 1em auto;
+    position: relative;
+}
+    .about-link {
+        position: absolute;
+        top: 0.5em;
+        right: 0;
+        font-weight: bold;
+        font-size: 100%;
+        text-transform: uppercase;
+        color: white;
+        background: #333;
+        padding: 0.7em 1em;
+    }
+
 .content {
     width: 1500px;
-    margin: 0 auto;
+    margin: 1px auto;
+    position: relative;
 }
+
+.about {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-image: url(../images/about_bg.png);
+    background-color: rgba(0, 0, 0, 0.8);
+    background-repeat: no-repeat;
+    background-position: -30px -50px;
+    z-index: 4;
+    display: none;
+}
+    .about p {
+        text-align: center;
+        margin: 1em 2em;
+        line-height: 1.6em;
+    }
 
 .row {
     overflow: hidden;
@@ -174,7 +211,7 @@ input.rating {
 
 @media (max-width: 1500px) {
 
-    .content {
+    .content, .header {
         width: 1148px;
     }
     .column {
@@ -198,7 +235,7 @@ input.rating {
 
 @media (max-width: 1150px) {
 
-    .content {
+    .content, .header {
         width: 760px;
     }
     .column {
@@ -222,7 +259,7 @@ input.rating {
 
 @media (max-width: 760px) {
 
-    .content {
+    .content, .header {
         width: 360px;
     }
     .column {

@@ -7,12 +7,25 @@
         <link rel="stylesheet" href="/static/css/reset.css" type="text/css" media="screen" />
         <link rel="stylesheet" href="/static/css/base.css" type="text/css" media="screen" />
         <script src="/static/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+        <script>
+            $(function () {
+                $(".about-link").click(function () { $(".about").slideToggle(); });
+            })
+        </script>
         {% block extra_head %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
-    <h1><a href="/">earth<i>lens</i></a></h1>
+
+    <div class="header">
+        <a href="/" class="logo"><img src="/static/images/logo.png"></a>
+        <a href="#" class="about-link">About</a>
+    </div>
     
     <div class="content">
+        <div class="about">
+            <p>Space. The Final Frontier. These are the images of the voyages of the people of the countries of the world.</p>
+            <p>Of course, something more funny, informative or just plain boring will go here in the live version, but for now I'm going to make this super awesome long fake section of text that for some reason you're still reading! Stop it!</p>
+        </div>
         {% block content %}
         {% endblock %}
     </div>
