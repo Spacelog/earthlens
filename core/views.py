@@ -139,17 +139,9 @@ class TagView(TemplateView):
         }
 
     def post(self, request, **kwargs):
-        if "tag" in self.request.POST:
-            try:
-                tag = Tag.objects.get(name=self.request.POST["tag"])
-            except Tag.DoesNotExist:
-                raise "LIES! NO TAG FOR YOU"
-
-        try:
-            image = Image.objects.get(pk=self.request.POST["image"])
-        except Image.DoesNotExist:
-            raise "You must be a lookying at a different space galaxy dimension. Alter yo lenses."
-        
+        tag = Tag.objects.get(name=self.request.POST["tag"])
+        image = Image.objects.get(pk=self.request.POST["image"])
         user_tag = UserTag.objects.get_or_create(user=request.user, image=image, tagged=tag)
+
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 
