@@ -72,8 +72,8 @@ class ImageView(DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(ImageView, self).get_context_data(*args, **kwargs)
         series = self.request.GET.get('series', None)
-        index = int(self.request.GET.get("index", None))
-        if series and index is not None:
+        index = int(self.request.GET.get("index", -1))
+        if series and index >= 0:
             # This is part of a series; make previous/next links
             queryset = series_queryset(series)
             if index > 0:

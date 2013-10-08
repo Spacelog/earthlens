@@ -4,6 +4,7 @@
     <script>
         var next_offset = {{ page_size }};
         var loading = false;
+        var original_url = document.location.href;
 
         var load_more = function () {
             // Make sure only one fetch runs at a time
@@ -50,6 +51,7 @@
 
         var close_lightbox = function () {
             $(".lightbox").remove();
+            window.history.replaceState({}, $("title").text(), original_url);
         }
 
         $(function () {
@@ -71,6 +73,9 @@
                 if (!url) {
                     url = $(this).find("a").attr("href");
                 }
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState({}, $("title").text(), url.substring(0, url.indexOf("?")));
+                }
                 $.ajax({
                     url: url + "&ajax=1",
                     success: function(data) {   
@@ -90,7 +95,6 @@
                 } else if (event.which == 39) {
                     $(".next-arrow").click();
                 }
-                console.log(event.which)
             });
         })
     </script>
