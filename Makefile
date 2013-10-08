@@ -5,4 +5,4 @@ upgrade: env
 	./env/bin/pip install -U -r ./requirements.txt
 
 env:
-	virtualenv ./env
+	virtualenv --system-site-packages ./env
