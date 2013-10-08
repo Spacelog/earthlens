@@ -19,17 +19,18 @@ class Command(BaseCommand):
         self.last_fetch = 0
         self.cache = {}
         for img in Image.objects.raw('SELECT * FROM core_image'):
-            print img.code, img.latitude, img.longitude, self.geocode(img.latitude, img.longitude)
+            preposition, location = self.geocode(img.latitude, img.longitude)
+            print img.code, img.latitude, img.longitude, preposition, location
 
     def geocode(self, latitude, longitude):
         data = self.find_nearby(latitude, longitude)
         adm1 = None
         if data.find('ocean') is not None:
             # We're over an ocean
-            return data.find('ocean/name').text
+            return "over the", data.find('ocean/name').text
         elif data.find('country') is not None:
             # No populated places nearby, but we have a country
-            return data.find('countryName').text
+            return "over", data.find('countryName').text
         elif data.find('address') is not None:
             # We have an "address"-style response. Whatever that is.
             name_parts = [data.find('address/placename').text]
@@ -48,7 +49,7 @@ class Command(BaseCommand):
             name_parts.append(adm1)
 
         name_parts.append(countries.get(alpha2=country_code).name)
-        return ", ".join(part for part in name_parts if part is not None)
+        return "near", ", ".join(part for part in name_parts if part is not None)
 
     def find_nearby(self, latitude, longitude, radius=10):
         params = {'lat': latitude, 'lng': longitude,
