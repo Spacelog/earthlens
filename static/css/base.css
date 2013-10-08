@@ -22,6 +22,14 @@ h1 {
         color: #777;
     }
 
+h2 {
+    font-size: 130%;
+    margin: 1em 0 0.7em 0;
+}
+
+ol li {
+    margin: 0.4em 0;
+}
 
 .header {
     width: 1500px;

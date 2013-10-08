@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, DetailView
-from django.db.models import F
+from django.db.models import F, Count
+from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
 from core.models import Image, ImageVote, Tag, UserTag
 
@@ -145,3 +146,13 @@ class TagView(TemplateView):
 
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 
+
+class LeaderboardView(TemplateView):
+
+    template_name = "leaderboard.html"
+
+    def get_context_data(self):
+        return {
+            "rated": User.objects.annotate(rated=Count("vote_objects")).order_by("-rated"),
+            "tagged": User.objects.annotate(tagged=Count("tag_objects")).order_by("-tagged"),
+        }

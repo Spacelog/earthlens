@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Rated</h2>
+    <ol>
+        {% for user in rated %}
+            <li>{{ user }} ({{ user.rated }})</li>
+        {% endfor %}
+    </ol>
+
+    <h2>Tagged</h2>
+    <ol>
+        {% for user in tagged %}
+            <li>{{ user }} ({{ user.tagged }})</li>
+        {% endfor %}
+    </ol>
+{% endblock %}
