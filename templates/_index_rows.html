@@ -2,38 +2,38 @@
     {% if forloop.counter == 1 %}
         <div class="row row-5">
             <div class="column">
-                {% include "_image_square.html" with image=row.1 %}
-                {% include "_image_square.html" with image=row.2 %}
+                {% if row.1 %}{% include "_image_square.html" with image=row.1 %}{% endif %}
+                {% if row.2 %}{% include "_image_square.html" with image=row.2 %}{% endif %}
             </div>
-            {% include "_image_square.html" with image=row.0 extra_classes="large" %}
+            {% if row.0 %}{% include "_image_square.html" with image=row.0 extra_classes="large" %}{% endif %}
             <div class="column">
-                {% include "_image_square.html" with image=row.3 %}
-                {% include "_image_square.html" with image=row.4 %}
+                {% if row.3 %}{% include "_image_square.html" with image=row.3 %}{% endif %}
+                {% if row.4 %}{% include "_image_square.html" with image=row.4 %}{% endif %}
             </div>
         </div>
     {% elif forloop.counter == 3 %}
         <div class="row row-5">
-            {% include "_image_square.html" with image=row.0 extra_classes="large" %}
+            {% if row.0 %}{% include "_image_square.html" with image=row.0 extra_classes="large" %}{% endif %}
             <div class="column">
-                {% include "_image_square.html" with image=row.1 %}
-                {% include "_image_square.html" with image=row.2 %}
+                {% if row.1 %}{% include "_image_square.html" with image=row.1 %}{% endif %}
+                {% if row.2 %}{% include "_image_square.html" with image=row.2 %}{% endif %}
             </div>
             <div class="column">
-                {% include "_image_square.html" with image=row.3 %}
-                {% include "_image_square.html" with image=row.4 %}
+                {% if row.3 %}{% include "_image_square.html" with image=row.3 %}{% endif %}
+                {% if row.4 %}{% include "_image_square.html" with image=row.4 %}{% endif %}
             </div>
         </div>
     {% elif forloop.counter == 4 %}
         <div class="row row-5">
             <div class="column">
-                {% include "_image_square.html" with image=row.1 %}
-                {% include "_image_square.html" with image=row.2 %}
+                {% if row.1 %}{% include "_image_square.html" with image=row.1 %}{% endif %}
+                {% if row.2 %}{% include "_image_square.html" with image=row.2 %}{% endif %}
             </div>
             <div class="column">
-                {% include "_image_square.html" with image=row.3 %}
-                {% include "_image_square.html" with image=row.4 %}
+                {% if row.3 %}{% include "_image_square.html" with image=row.3 %}{% endif %}
+                {% if row.4 %}{% include "_image_square.html" with image=row.4 %}{% endif %}
             </div>
-            {% include "_image_square.html" with image=row.0 extra_classes="large" %}
+            {% if row.0 %}{% include "_image_square.html" with image=row.0 extra_classes="large" %}{% endif %}
         </div>
     {% else %}
         <div class="row">

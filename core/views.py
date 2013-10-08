@@ -10,6 +10,8 @@ def series_queryset(series):
         return Image.objects.order_by("-rating", "-votes", "id")
     elif series.startswith("m-"):
         return Image.objects.filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
+    elif series.startswith("t-"):
+        return Image.objects.filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
     else:
         raise ValueError("Unknown series %s" % series)
 
@@ -48,6 +50,8 @@ class IndexView(TemplateView):
             if len(rows[-1]) >= self.row_pattern[(len(rows) - 1) % len(self.row_pattern)]:
                 rows.append([])
             rows[-1].append(image)
+        if not rows[-1]:
+            rows = rows[:-1]
         return rows
 
 
@@ -56,6 +60,13 @@ class MissionView(IndexView):
     @property
     def series(self):
         return "m-" + self.kwargs['mission']
+
+
+class TagView(IndexView):
+
+    @property
+    def series(self):
+        return "t-" + self.kwargs['slug']
 
 
 class ImageView(DetailView):
@@ -126,9 +137,9 @@ class RateView(TemplateView):
         }
 
 
-class TagView(TemplateView):
+class TaggerView(TemplateView):
 
-    template_name = "tag.html"
+    template_name = "tagger.html"
     model = Image
 
     def get_context_data(self):
@@ -148,8 +159,9 @@ class TagView(TemplateView):
     def post(self, request, **kwargs):
         tag = Tag.objects.get(name=self.request.POST["tag"].split("(")[0][:-1])
         image = Image.objects.get(pk=self.request.POST["image"])
-        user_tag = UserTag.objects.get_or_create(user=request.user, image=image, tagged=tag)
-
+        user_tag = UserTag.objects.get_or_create(user=request.user, image=image, defaults={"tagged": tag})[0]
+        user_tag.tagged = tag
+        user_tag.save()
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 
 
