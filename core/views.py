@@ -147,7 +147,7 @@ class TaggerView(TemplateView):
             image = Image.objects.get(pk=self.request.GET['image'])
         else:
             try:
-                image = Image.objects.exclude(tag_objects__user=self.request.user).order_by("?")[0]
+                image = Image.objects.exclude(tag_objects__user=self.request.user).order_by("-rating")[0]
             except IndexError:
                 return {"image": None}
         return {
