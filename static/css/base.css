@@ -201,6 +201,12 @@ input.tag {
     background: rgba(0, 0, 0, 0.8);
     z-index: 5;
 }
+    .lightbox .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+    }
     .lightbox .large-image img {
         max-width: 100%;
         max-height: 100%;

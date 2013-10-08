@@ -45,7 +45,7 @@
 
         var open_lightbox = function () {
             $(".lightbox").remove();
-            $("body").append("<div class='lightbox'></div>");
+            $("body").append("<div class='lightbox'><img src='/static/images/close-button.png' class='close'></div>");
             $(".lightbox").click(close_lightbox);
         }
 
@@ -79,7 +79,7 @@
                 $.ajax({
                     url: url + "&ajax=1",
                     success: function(data) {   
-                        $(".lightbox").html(data);
+                        $(".lightbox").append(data);
                     },
                 });
                 // Don't cascade
