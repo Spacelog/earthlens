@@ -16,8 +16,8 @@ def series_queryset(series):
 
 class IndexView(TemplateView):
 
-    row_pattern = [5, 4]
-    page_size = 18
+    row_pattern = [5, 4, 5, 5, 4]
+    page_size = 23
     series = "index"
 
     def get_template_names(self):
