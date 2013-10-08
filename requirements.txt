@@ -2,3 +2,5 @@ Django<1.6
 South
 beautifulsoup4
 psycopg2
+requests
+pycountry
