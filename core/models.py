@@ -89,3 +89,23 @@ class ImageVote(models.Model):
         unique_together = [
             ["user", "image"],
         ]
+
+
+class Tag(models.Model):
+    """
+    Classification of an image.
+    """
+
+    name = models.TextField()
+    descriptive_image = models.ForeignKey(Image, null=True)
+
+
+class UserTag(models.Model):
+    """
+    Stores a user's tag of an image.
+    """
+
+    user = models.ForeignKey("auth.User", related_name="tag_objects")
+    image = models.ForeignKey(Image, related_name="tag_objects")
+    tagged = models.ForeignKey(Tag)
+

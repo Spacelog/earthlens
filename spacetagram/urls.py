@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
 from django.contrib import admin
-from core.views import IndexView, ImageView, RateView, MissionView
+from core.views import IndexView, ImageView, RateView, MissionView, TagView
 
 admin.autodiscover()
 
@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^rate/$', login_required(RateView.as_view()), name='rate'),
+    url(r'^tag/$', login_required(TagView.as_view()), name='tag'),
     url(r'^login/$', login, name='login'),
     url(r'^logout/$', logout, {"next_page": "/" }, name='logout'),
 ) + \

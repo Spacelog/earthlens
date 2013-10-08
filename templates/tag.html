@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="rate">
+        {% if image %}
+            <img src="{{ image.get_large_url }}">
+            <form action="{% url "tag" %}" method="POST" class="rating">
+                {% csrf_token %}
+                <input type="hidden" name="image" value="{{ image.pk }}">
+                <input type="hidden" name="next" value="/tag/?prev={{ image.pk }}">
+                {% for tag in tags %}
+                    <input type="submit" class="tag" name="tag" value="{{ tag.name }}">    
+                {% endfor %}
+                
+                ID {{ image.pk }}
+                <a href="/logout/">Logout</a>
+            </form>
+            {% if prev_image %}
+                <div class="previous-image">
+                    Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
+                </div>
+            {% endif %}
+        {% else %}
+            All rated! You're amazing!
+        {% endif %}
+    </div>
+{% endblock %}

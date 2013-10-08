@@ -1,7 +1,7 @@
 from django.views.generic import TemplateView, DetailView
 from django.db.models import F
 from django.http import HttpResponseRedirect, Http404
-from core.models import Image, ImageVote
+from core.models import Image, ImageVote, Tag, UserTag
 
 
 def series_queryset(series):
@@ -120,3 +120,36 @@ class RateView(TemplateView):
             "image": image,
             "prev_image": Image.objects.get(pk=self.request.GET['prev']) if "prev" in self.request.GET else None,
         }
+
+
+class TagView(TemplateView):
+
+    template_name = "tag.html"
+    model = Image
+
+    def get_context_data(self):
+        try:
+            image = Image.objects.exclude(tag_objects__user=self.request.user).order_by("?")[0]
+        except IndexError:
+            return {"image": None}
+        return {
+            "tags": Tag.objects.all(),
+            "image": image,
+            "prev_image": Image.objects.get(pk=self.request.GET['prev']) if "prev" in self.request.GET else None,
+        }
+
+    def post(self, request, **kwargs):
+        if "tag" in self.request.POST:
+            try:
+                tag = Tag.objects.get(name=self.request.POST["tag"])
+            except Tag.DoesNotExist:
+                raise "LIES! NO TAG FOR YOU"
+
+        try:
+            image = Image.objects.get(pk=self.request.POST["image"])
+        except Image.DoesNotExist:
+            raise "You must be a lookying at a different space galaxy dimension. Alter yo lenses."
+        
+        user_tag = UserTag.objects.get_or_create(user=request.user, image=image, tagged=tag)
+        return HttpResponseRedirect(self.request.POST.get("next", "."))
+
