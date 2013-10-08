@@ -27,6 +27,9 @@ h2 {
     margin: 1em 0 0.7em 0;
 }
 
+ol {
+    list-style-type: decimal;
+}
 ol li {
     margin: 0.4em 0;
 }
