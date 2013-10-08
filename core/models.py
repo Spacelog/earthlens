@@ -100,7 +100,7 @@ class Tag(models.Model):
     """
 
     name = models.TextField()
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(unique=True, null=True)
     descriptive_image = models.ForeignKey(Image, null=True)
 
 

@@ -46,10 +46,12 @@
         var open_lightbox = function () {
             $(".lightbox").remove();
             $("body").append("<div class='lightbox'><img src='/static/images/close-button.png' class='close'></div>");
-            $(".lightbox").click(close_lightbox);
+            $(".lightbox").click(close_lightbox)
+            $("body").css({overflow: "hidden"});
         }
 
         var close_lightbox = function () {
+            $("body").css({overflow: "scroll"});
             $(".lightbox").remove();
             window.history.replaceState({}, $("title").text(), original_url);
         }
@@ -86,6 +88,7 @@
                 ev.preventDefault();
                 return false;
             })
+            // Absorb lightbox scrolls
             // Escape closes lightbox
             $("body").keydown(function (event) {
                 if (event.which == 27) {
