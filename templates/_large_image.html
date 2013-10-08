@@ -28,13 +28,12 @@
     </div>
 </div>
 <script>
-    $(".large-image .meta a").click(function (ev) {
-        document.location.href = this.href;
-    })
     $(".large-image .meta").click(function (ev) {
-        $(".more").fadeToggle("fast");
-        ev.preventDefault();
-        return false;
+        if (ev.target.tagName != "A") {
+            $(".more").fadeToggle("fast");
+            ev.preventDefault();
+            return false;
+        }
     })
     $(".large-image .more").hide();
     twttr.widgets.load();
