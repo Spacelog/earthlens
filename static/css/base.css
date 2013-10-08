@@ -147,7 +147,7 @@ input.rating {
     font-size: 1.3em;
     border-radius: 3px;
     border: 0;
-    background-color: #3C8749;
+    background-color: #2E4D87;
 }
     input.rating.neutral {
         background-color: #B7BE1C;
@@ -155,9 +155,18 @@ input.rating {
     input.rating.bad {
         background-color: #B2221B;
     }
-    input.rating.awesome {
-        background-color: #2E4D87;
+    input.rating.good {
+        background-color: #3C8749;
     }
+
+input.tag {
+    padding: 10px 20px;
+    font-size: 0.9em;
+    border-radius: 3px;
+    border: 0;
+    background-color: #2E4D87;
+    color: #fff;
+}
 
 .rate img {
     max-width: 100%;

@@ -139,7 +139,7 @@ class TagView(TemplateView):
         }
 
     def post(self, request, **kwargs):
-        tag = Tag.objects.get(name=self.request.POST["tag"])
+        tag = Tag.objects.get(name=self.request.POST["tag"].split("(")[0][:-1])
         image = Image.objects.get(pk=self.request.POST["image"])
         user_tag = UserTag.objects.get_or_create(user=request.user, image=image, tagged=tag)
 

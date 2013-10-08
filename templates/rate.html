@@ -21,7 +21,6 @@
 {% block content %}
     <div class="rate">
         {% if image %}
-            <img src="{{ image.get_large_url }}">
             <form action="{% url "image" image.pk %}" method="POST" class="rating">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="/rate/?prev={{ image.pk }}">
@@ -32,6 +31,7 @@
                 ID {{ image.pk }}
                 <a href="/logout/">Logout</a>
             </form>
+            <img src="{{ image.get_large_url }}">
             {% if prev_image %}
                 <div class="previous-image">
                     Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
