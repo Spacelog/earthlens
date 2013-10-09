@@ -1,5 +1,5 @@
 from django.contrib.admin import site
-from core.models import Mission, Image, ImageVote, Tag, UserTag
+from core.models import Mission, Image, ImageVote, Tag, UserTag, ImageLocation
 
 site.register(
     Mission,
@@ -26,3 +26,7 @@ site.register(
     list_display = ["id", "image", "user", "tagged"],
 )
 
+site.register(
+    ImageLocation,
+    list_display = ["image", "preposition", "location"],
+)
