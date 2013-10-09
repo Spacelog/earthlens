@@ -72,7 +72,11 @@ class Image(models.Model):
             if self.geographic_name is None or self.geographic_name == '':
                 name = 'Unknown'
             else:
-                name = self.geographic_name.title()
+                name = self.geographic_name.title().replace("-", " - ")
+                if name.startswith("Usa"):
+                    name = "USA" + name[3:]
+                if name.startswith("Uk"):
+                    name = "UK" + name[2:]
             if preposition:
                 return "near", name
             else:
@@ -101,8 +105,13 @@ class Image(models.Model):
         else:
             return None
 
+
 class ImageLocation(models.Model):
-    image = models.ForeignKey(Image)
+    """
+    Image geocoded locations. Separate for licensing reasons.
+    """
+
+    image = models.ForeignKey(Image, unique=True)
     preposition = models.TextField()
     location = models.TextField()
 
