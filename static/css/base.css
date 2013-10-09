@@ -74,12 +74,14 @@ ol li {
 }
 
 .show {
-    position: absolute;
     z-index: 3;
     background-color: rgba(0, 0, 0, 0.8);
     width: 100%;
-    font-size: 10px;
+    font-size: 90%;
 }
+    .hasJS .show {
+        position: absolute; 
+    }
     .show h2 {
         text-align: center;
         padding: 5px 0 5px 0;
@@ -89,7 +91,7 @@ ol li {
 
     .show h2:after {
         content: "";
-        width: 13px;
+        width: 19px;
         height: 8px;
         display: inline-block;
         background-repeat: no-repeat;
@@ -104,10 +106,14 @@ ol li {
         background-image: url(../images/triangle_down.png);
     }
 
+    .show ul {
+        text-align: center;
+    }
+
     .show li {
         width: 100px;
         display: inline-block;
-        padding: 5px 5px 5px 5px;
+        padding: 8px;
         margin: 10px 20px 10px 20px;
     }
 
@@ -123,6 +129,7 @@ ol li {
     .show span {
         display: block;
         text-align: center;
+        margin: 0.5em 0 0 0;
     }
 
 .image-grid {
@@ -390,6 +397,9 @@ table.leaderboard th a {
 
 @media (max-width: 760px) {
 
+    .logo img {
+        width: 200px;
+    }
     .content, .header {
         width: 360px;
     }
@@ -406,6 +416,9 @@ table.leaderboard th a {
     }
     .large-image img {
         width: 360px;
+    }
+    .about-link {
+        margin-top: 0;
     }
 
 }

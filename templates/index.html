@@ -76,6 +76,7 @@
         $(function () {
             hide_tags();
             make_show_all_clicky();
+            $("body").addClass("hasJS");
 
             // Load more manual
             $(".load-more").click(load_more);
@@ -134,9 +135,8 @@
         <ul class="enhanced">
         {% for tag in tags %}
             <li>
-                <a href="{% url 'mission' tag.slug %}">
-                    <img src="/static/missions/SL2/large/SL2-7-661.jpg" width="100" height="100">
-                    <!-- <img src="{{ tag.descriptive_image.get_square_url }}" > -->
+                <a href="{% url 'tag' tag.slug %}">
+                    <img src="{{ tag.descriptive_image.get_square_url }}" width="100" height="100">
                     <span>{{ tag.name }}</span>
                 </a>
             </li>
