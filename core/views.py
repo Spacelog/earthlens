@@ -195,12 +195,10 @@ class LeaderboardView(TemplateView):
             total = float(ImageVote.objects.filter(user=user).count())
             if total:
                 votes = {vote_names[vote]: round(ImageVote.objects.filter(user=user, vote=vote).count()/total*100, 2) for vote in [0, 1, -1, 3]}
-            else:
-                votes = {}
-            votes["total"] = int(total)
-            votes["tags"] = UserTag.objects.filter(user=user).count()
-            votes["username"] = user.username
-            table.append(votes)
+                votes["total"] = int(total)
+                votes["tags"] = UserTag.objects.filter(user=user).count()
+                votes["username"] = user.username
+                table.append(votes)
         sort_key = self.request.GET.get("sort", "total")
         descending = self.request.GET.get("descending", "true") is "true"
         table.sort(key=lambda x: x.get(sort_key, None), reverse=descending)

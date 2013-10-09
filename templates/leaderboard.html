@@ -64,10 +64,18 @@
         <td>{{ user.username }}</td>
         <td>{{ user.total }}</td>
         <td>{{ user.tags }}</td>
-        <td>{{ user.awesome }}%</td>
-        <td>{{ user.good }}%</td>
-        <td>{{ user.neutral }}%</td>
-        <td>{{ user.bad }}%</td>
+        <td style="background-image: linear-gradient(to top, #444444 0%, #444444 {{ user.awesome }}%, #000000 0%);">
+            {{ user.awesome }}%
+        </td>
+        <td style="background-image: linear-gradient(to top, #444444 0%, #444444 {{ user.good }}%, #000000 0%);">
+            {{ user.good }}%
+        </td>
+        <td style="background-image: linear-gradient(to top, #444444 0%, #444444 {{ user.neutral }}%, #000000 0%);">
+            {{ user.neutral }}%
+        </td>
+        <td style="background-image: linear-gradient(to top, #444444 0%, #444444 {{ user.bad }}%, #000000 0%);">
+            {{ user.bad }}%
+        </td>
     </tr>
     {% endfor %}
 </table>
