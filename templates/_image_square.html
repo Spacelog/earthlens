@@ -1,4 +1,4 @@
-<p class="image {{ extra_classes }} {% if request.user.is_staff and image.in_group %}in-group{% endif %} {% if request.user.is_staff and image.group_hides %}group-hides{% endif %}">
+<p class="image {{ extra_classes }} {% if user.is_staff and show_groups %}{% if image.in_group %}in-group{% elif image.group_hides %}group-hides{% endif %}{% endif %}">
     <a href="{% url "image" image.pk %}?series={{ series }}&amp;index={{ image.index }}">
         <img src="{{ image.get_square_url }}">
     </a>

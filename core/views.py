@@ -25,6 +25,7 @@ class IndexView(TemplateView):
     row_pattern = [5, 4, 5, 5, 4]
     page_size = 23
     series = "index"
+    show_groups = False
 
     def get_template_names(self):
         if self.request.GET.get("offset", 0):
@@ -46,6 +47,7 @@ class IndexView(TemplateView):
             raise Http404("No images left")
         context["page_size"] = self.page_size
         context["series"] = self.series
+        context["show_groups"] = self.show_groups
         return context
 
     def make_rows(self, images):
@@ -70,6 +72,7 @@ class MissionTimelineView(IndexView):
 
     row_pattern = [4]
     page_size = 20
+    show_groups = True
 
     @property
     def series(self):
