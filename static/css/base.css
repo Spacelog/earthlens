@@ -106,7 +106,12 @@ ol li {
     box-sizing: border-box;
 }
     .image.in-group {
-        border-color: #C2822C;
+        border-color: #07FF00;
+        border-width: 3px;
+    }
+    .image.group-hides {
+        border-color: #F52906;
+        border-width: 3px;
     }
     .image.large {
         width: 750px;
