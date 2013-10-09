@@ -13,6 +13,13 @@ USERNAME = 'russss'
 
 ADM1_COUNTRIES = ['US', 'GB']
 
+
+def lookup_country(code):
+    if code == 'XK':
+        return 'Kosovo'
+    return countries.get(alpha2=code).name
+
+
 class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
@@ -50,8 +57,9 @@ class Command(BaseCommand):
             # We've decided to show the ADM1 (state) here.
             name_parts.append(adm1)
 
-        name_parts.append(countries.get(alpha2=country_code).name)
+        name_parts.append(lookup_country(country_code))
         return "near", ", ".join(part for part in name_parts if part is not None)
+
 
     def find_nearby(self, latitude, longitude, radius=10):
         params = {'lat': latitude, 'lng': longitude,
