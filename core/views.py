@@ -42,6 +42,15 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         offset = int(self.request.GET.get("offset", 0))
         images = list(self.get_queryset()[offset:offset+self.page_size])
+        tags = Tag.objects.exclude(name='Skip')
+        context["tags"] = tags
+        
+        try:
+            current_tag = Tag.objects.get(slug=self.kwargs["slug"])
+            context["current_tag"] = current_tag
+        except KeyError:
+            pass
+        
         for i, image in enumerate(images):
             image.index = offset + i
         context["rows"] = self.make_rows(images)

@@ -69,6 +69,67 @@ ol li {
     position: relative;
 }
 
+.container {
+    position: relative;
+}
+
+.show {
+    position: absolute;
+    z-index: 3;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+    font-size: 10px;
+}
+    .show h2 {
+        text-align: center;
+        padding: 5px 0 5px 0;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    .show h2:after {
+        content: "";
+        width: 13px;
+        height: 8px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center right;        
+    }
+
+    .show.open h2:after {
+        background-image: url(../images/triangle_up.png);
+    }
+
+    .show.closed h2:after {
+        background-image: url(../images/triangle_down.png);
+    }
+
+    .show li {
+        width: 100px;
+        display: inline-block;
+        padding: 5px 5px 5px 5px;
+        margin: 10px 20px 10px 20px;
+    }
+
+    .show li:hover {
+        background-color: black;
+    }
+
+    .show li a {
+        color: white;
+        background-image: none;
+    }
+
+    .show span {
+        display: block;
+        text-align: center;
+    }
+
+.image-grid {
+    position: relative;
+    z-index: 2;
+}
+
 .about {
     position: absolute;
     top: 0;

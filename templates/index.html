@@ -56,7 +56,27 @@
             window.history.replaceState({}, $("title").text(), original_url);
         }
 
+        var hide_tags = function () {
+            $(".show ul.enhanced").hide();
+            $(".show").addClass("closed");
+        }
+
+        var show_tags = function() {
+            $(".show").toggleClass("closed");
+            $(".show").toggleClass("open");
+            $(".show ul.enhanced").slideToggle();
+        }
+
+        var make_show_all_clicky = function() {
+            $(".show h2").bind("click", function() {
+                show_tags();
+            });
+        }
+
         $(function () {
+            hide_tags();
+            make_show_all_clicky();
+
             // Load more manual
             $(".load-more").click(load_more);
             // Load more auto
@@ -89,7 +109,7 @@
                 return false;
             })
             // Absorb lightbox scrolls
-            // Escape closes lightbox
+            // Escape closes close_lightbox
             $("body").keydown(function (event) {
                 if (event.which == 27) {
                     close_lightbox();
@@ -108,8 +128,25 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
+    <div class="show">
+        <h2>Showing all the images{% if current_tag %} for {{ current_tag.name }}{% endif %}</h2>
+        <ul class="enhanced">
+        {% for tag in tags %}
+            <li>
+                <a href="{% url 'mission' tag.slug %}">
+                    <img src="/static/missions/SL2/large/SL2-7-661.jpg" width="100" height="100">
+                    <!-- <img src="{{ tag.descriptive_image.get_square_url }}" > -->
+                    <span>{{ tag.name }}</span>
+                </a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+
     <div class="image-grid">
         {% include "_index_rows.html" %}
     </div>
     <p class="load-more">Load more</p>
+</div>
 {% endblock %}
