@@ -83,6 +83,11 @@ class Image(models.Model):
         else:
             return None
 
+class ImageLocation(models.Model):
+    image = models.ForeignKey(Image)
+    preposition = models.TextField()
+    location = models.TextField()
+
 
 class ImageVote(models.Model):
     """
