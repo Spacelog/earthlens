@@ -97,7 +97,7 @@ class Image(models.Model):
         if self.date_start and self.date_end:
             return "%s to %s" % (self.date_start, self.date_end)
         elif self.date is not None:
-            return self.date
+            return self.date.strftime('%B %d %Y, %H:%M:%S') + " UTC"
         else:
             return None
 
