@@ -16,6 +16,8 @@ def series_queryset(series):
         return Image.objects.exclude(group_hides=True).filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
     elif series.startswith("tt-"):
         return Image.objects.filter(tag_objects__tagged__slug=series[3:]).order_by("date", "code")
+    elif series.startswith("ua-"):
+        return Image.objects.filter(vote_objects__user__username=series[3:], vote_objects__vote=3).order_by("date", "code")
     else:
         raise ValueError("Unknown series %s" % series)
 
@@ -77,6 +79,17 @@ class MissionTimelineView(IndexView):
     @property
     def series(self):
         return "mt-" + self.kwargs['mission']
+
+
+class UserAwesomeView(IndexView):
+
+    row_pattern = [4]
+    page_size = 20
+    show_groups = True
+
+    @property
+    def series(self):
+        return "ua-" + self.kwargs['username']
 
 
 class TagView(IndexView):

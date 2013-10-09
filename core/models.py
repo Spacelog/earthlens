@@ -97,6 +97,7 @@ class ImageVote(models.Model):
     user = models.ForeignKey("auth.User", related_name="vote_objects")
     image = models.ForeignKey(Image, related_name="vote_objects")
     vote = models.IntegerField()
+    date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = [
@@ -122,4 +123,5 @@ class UserTag(models.Model):
     user = models.ForeignKey("auth.User", related_name="tag_objects")
     image = models.ForeignKey(Image, related_name="tag_objects")
     tagged = models.ForeignKey(Tag)
+    date = models.DateTimeField(auto_now_add=True)
 
