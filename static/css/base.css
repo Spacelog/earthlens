@@ -158,11 +158,11 @@ ol li {
     }
     .large-image h2 {
         font-size: 140%;
-        margin: 0.5em 0 0.5em 2.6em;
+        margin: 0.5em 0 0.5em 60px;
     }
     .large-image li {
         font-size: 90%;
-        margin: 0.3em 0 0.6em 4.1em;
+        margin: 0.3em 0 0.6em 60px;
     }
     .large-image a {
         color: inherit;
