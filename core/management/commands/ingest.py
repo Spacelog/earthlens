@@ -110,7 +110,10 @@ class Command(BaseCommand):
                     except TypeError:
                         missing.add("date")
                 else:
-                    details['date'] = datetime.datetime.strptime(date_string + "-" + time_string, "%Y%m%d-%H%M%S")
+                    try:
+                        details['date'] = datetime.datetime.strptime(date_string + "-" + time_string, "%Y%m%d-%H%M%S")
+                    except TypeError:
+                        missing.add("date")
             elif line.lower().startswith("captions"):
                 in_caption = True
                 details['caption_text'] = ""
