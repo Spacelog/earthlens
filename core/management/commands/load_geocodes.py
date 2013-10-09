@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-from core.models import ImageLocation
+from core.models import ImageLocation, Image
 
 
 class Command(BaseCommand):
@@ -13,8 +13,12 @@ class Command(BaseCommand):
                 line = line.strip()
                 if line:
                     code, prefix, name = line.split("\t")
-                    Image.objects.filter(code=code).update(
-                        geographic_prefix = prefix,
-                        geographic_name = name,
-                    )
+                    image = Image.objects.get(code=code)
+                    try:
+                        location = ImageLocation.objects.get(image=image)
+                    except ImageLocation.DoesNotExist:
+                        location = ImageLocation(image=image)
+                    location.preposition = prefix
+                    location.location = name
+                    location.save()
                     print "Loaded geocode for %s" % code
