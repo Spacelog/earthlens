@@ -100,19 +100,19 @@ class Command(BaseCommand):
                         details['date'] = datetime.datetime(date_string[:4], 1, 1)
                         details['date_start'] = datetime.datetime(date_string[:4], 1, 1)
                         details['date_end'] = datetime.datetime(date_string[:4], 12, 31)
-                    except TypeError:
+                    except (ValueError, TypeError):
                         missing.add("date")
                 elif time_string.startswith("(HH"):
                     try:
                         details['date'] = datetime.datetime.strptime(date_string, "%Y%m%d")
                         details['date_start'] = details['date']
                         details['date_end'] = details['date'] + details['date'].replace(hour=23, minute=59, second=59)
-                    except TypeError:
+                    except (ValueError, TypeError):
                         missing.add("date")
                 else:
                     try:
                         details['date'] = datetime.datetime.strptime(date_string + "-" + time_string, "%Y%m%d-%H%M%S")
-                    except TypeError:
+                    except (ValueError, TypeError):
                         missing.add("date")
             elif line.lower().startswith("captions"):
                 in_caption = True
