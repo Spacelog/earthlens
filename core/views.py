@@ -85,7 +85,6 @@ class UserAwesomeView(IndexView):
 
     row_pattern = [4]
     page_size = 20
-    show_groups = True
 
     @property
     def series(self):
