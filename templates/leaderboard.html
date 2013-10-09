@@ -3,6 +3,7 @@
 {% block content %}
 <table class="leaderboard">
     <tr>
+        <th>#</th>
         <th>
             {% if sort_key = "username" %}
                 <a href="?sort=username{% if descending %}&descending=false{% endif %}">Name</a>
@@ -61,6 +62,7 @@
     </tr>
     {% for user in table %}
     <tr>
+        <td>{{ forloop.counter }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.total }}</td>
         <td>{{ user.tags }}</td>
