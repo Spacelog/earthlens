@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class Mission(models.Model):
@@ -59,6 +60,23 @@ class Image(models.Model):
 
     def __str__(self):
         return self.code
+
+    def name(self, preposition=False):
+        try:
+            desc = ImageLocation.objects.get(image_id=self.id)
+            if preposition:
+                return desc.preposition, desc.location
+            else:
+                return desc.location
+        except ObjectDoesNotExist:
+            if self.geographic_name is None or self.geographic_name == '':
+                name = 'Unknown'
+            else:
+                name = self.geographic_name.title()
+            if preposition:
+                return "near", name
+            else:
+                return name
 
     def get_absolute_url(self):
         return "/image/%s/" % self.pk
