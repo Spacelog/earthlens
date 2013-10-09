@@ -151,7 +151,7 @@ class TaggerView(TemplateView):
             except IndexError:
                 return {"image": None}
         return {
-            "tags": Tag.objects.all(),
+            "tags": sorted(Tag.objects.order_by("slug"), key=lambda x: 2 if x.slug == "skip" else 1),
             "image": image,
             "prev_image": Image.objects.get(pk=self.request.GET['prev']) if "prev" in self.request.GET else None,
         }
