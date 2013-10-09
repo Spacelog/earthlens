@@ -4,10 +4,10 @@ import requests
 import lxml.etree
 from pycountry import countries
 from django.core.management import BaseCommand
-from core.models import Image
+from core.models import Image, ImageLocation
 
 # Rate limit - seconds/request
-RATE = 1  # 7.3 secs between hits for continuous use as per http://www.geonames.org/export/credits.html
+RATE = 7.3  # 7.3 secs between hits for continuous use as per http://www.geonames.org/export/credits.html
 ENDPOINT = 'http://api.geonames.org'
 USERNAME = 'russss'
 
@@ -18,8 +18,10 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         self.last_fetch = 0
         self.cache = {}
-        for img in Image.objects.raw('SELECT * FROM core_image'):
+        for img in Image.objects.raw("""SELECT * FROM core_image WHERE NOT EXISTS
+                                        (SELECT 1 FROM core_imagelocation WHERE image_id = core_image.id)"""):
             preposition, location = self.geocode(img.latitude, img.longitude)
+            ImageLocation.objects.create(image=img, preposition=preposition, location=location)
             print img.code, img.latitude, img.longitude, preposition, location
 
     def geocode(self, latitude, longitude):
