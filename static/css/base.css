@@ -153,7 +153,8 @@ ol li {
     }
     .large-image img {
         max-width: 100%;
-        cursor: pointer;
+        cursor: -webkit-zoom-in;
+        cursor: -moz-zoom-in;
     }
     .large-image h2 {
         font-size: 140%;
