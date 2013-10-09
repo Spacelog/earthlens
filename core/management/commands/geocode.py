@@ -28,11 +28,15 @@ class Command(BaseCommand):
         for img in Image.objects.raw("""SELECT * FROM core_image WHERE NOT EXISTS
                                         (SELECT 1 FROM core_imagelocation WHERE image_id = core_image.id)"""):
             preposition, location = self.geocode(img.latitude, img.longitude)
+            if preposition is None or location is None:
+                continue
             ImageLocation.objects.create(image=img, preposition=preposition, location=location)
             print img.code, img.latitude, img.longitude, preposition, location
 
     def geocode(self, latitude, longitude):
         data = self.find_nearby(latitude, longitude)
+        if data is None:
+            return None, None
         adm1 = None
         if data.find('ocean') is not None:
             # We're over an ocean
@@ -89,7 +93,7 @@ class Command(BaseCommand):
             elif value == '12':
                 print "Unknown Geonames error, sleeping for 10 seconds"
                 sleep(10)
-                return self.find_nearby(latitude, longitude, radius=radius)
+                return None
             else:
                 raise Exception("Unhandled Geonames error: %s" % value)
         self.cache[cache_key] = result
