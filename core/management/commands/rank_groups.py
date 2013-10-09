@@ -25,7 +25,7 @@ class Command(BaseCommand):
     def mark_run(self, run):
         # Find the best-rated images
         run.sort(key=lambda i: i.rating, reverse=True)
-        number_to_show = (len(run) // 5) + 1
+        number_to_show = (len(run) // 10) + 1
         for i, image in enumerate(run):
             image.group_hides = (i >= number_to_show)
             image.save()

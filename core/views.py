@@ -7,13 +7,13 @@ from core.models import Image, ImageVote, Tag, UserTag
 
 def series_queryset(series):
     if series == "index":
-        return Image.objects.order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).order_by("-rating", "-votes", "id")
     elif series.startswith("m-"):
-        return Image.objects.filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
     elif series.startswith("mt-"):
         return Image.objects.filter(mission__code__iexact=series[3:]).order_by("date", "code")
     elif series.startswith("t-"):
-        return Image.objects.filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
     elif series.startswith("tt-"):
         return Image.objects.filter(tag_objects__tagged__slug=series[3:]).order_by("date", "code")
     else:
