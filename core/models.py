@@ -65,7 +65,7 @@ class Image(models.Model):
         try:
             desc = ImageLocation.objects.get(image_id=self.id)
             if preposition:
-                return desc.preposition, desc.location
+                return desc.preposition.title() + " " + desc.location
             else:
                 return desc.location
         except ObjectDoesNotExist:
@@ -78,9 +78,12 @@ class Image(models.Model):
                 if name.startswith("Uk"):
                     name = "UK" + name[2:]
             if preposition:
-                return "near", name
+                return "Near " + name
             else:
                 return name
+
+    def name_with_preposition(self):
+        return self.name(True)
 
     def get_absolute_url(self):
         return "/image/%s/" % self.pk
