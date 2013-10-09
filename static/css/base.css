@@ -130,23 +130,23 @@ ol li {
     z-index: 2;
 }
 
-.about {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-image: url(../images/about_bg.png);
-    background-color: rgba(0, 0, 0, 0.8);
-    background-repeat: no-repeat;
-    background-position: -30px -50px;
-    z-index: 4;
-    display: none;
+.about p {
+    margin: 0.5em 0 1em 0;
+    line-height: 1.6em;
+    max-width: 40em;
 }
-    .about p {
-        text-align: center;
-        margin: 1em 2em;
-        line-height: 1.6em;
-    }
+.about h2 {
+    font-size: 120%;
+    margin: 2em 0 0.8em 0;
+    font-weight: bold;
+}
+.about h3 {
+    margin: 0.6em 0 0.3em 0;
+    font-weight: bold;
+}
+.about p a {
+    color: #369;
+}
 
 .row {
     overflow: hidden;
