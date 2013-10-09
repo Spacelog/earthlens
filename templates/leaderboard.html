@@ -1,17 +1,74 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Rated</h2>
-    <ol>
-        {% for user in rated %}
-            <li>{{ user }} ({{ user.rated }})</li>
-        {% endfor %}
-    </ol>
-
-    <h2>Tagged</h2>
-    <ol>
-        {% for user in tagged %}
-            <li>{{ user }} ({{ user.tagged }})</li>
-        {% endfor %}
-    </ol>
+<table class="leaderboard">
+    <tr>
+        <th>
+            {% if sort_key = "username" %}
+                <a href="?sort=username{% if descending %}&descending=false{% endif %}">Name</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=username">Name</a>
+            {% endif %}
+        </th>
+        <th>
+            {% if sort_key = "total" %}
+                <a href="?sort=total{% if descending %}&descending=false{% endif %}">Total votes</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=total">Total votes</a>
+            {% endif %}
+        </th>
+        <th>
+            {% if sort_key = "tags" %}
+                <a href="?sort=tags{% if descending %}&descending=false{% endif %}">Total tags</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=tags">Total tags</a>
+            {% endif %}
+        </th>
+        <th class="awesome">
+            {% if sort_key = "awesome" %}
+                <a href="?sort=awesome{% if descending %}&descending=false{% endif %}">Awesome</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=awesome">Awesome</a>
+            {% endif %}
+        </th>
+        <th class="good">
+            {% if sort_key = "good" %}
+                <a href="?sort=good{% if descending %}&descending=false{% endif %}">Good</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=good">Good</a>
+            {% endif %}
+        </th>
+        <th class="neutral">
+            {% if sort_key = "neutral" %}
+                <a href="?sort=neutral{% if descending %}&descending=false{% endif %}">Neutral</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=neutral">Neutral</a>
+            {% endif %}        
+        </th>
+        <th class="bad">
+            {% if sort_key = "bad" %}
+                <a href="?sort=bad{% if descending %}&descending=false{% endif %}">Bad</a>
+                {% if descending %}⬇{% else %}⬆{% endif %}
+            {% else %}
+                <a href="?sort=bad">Bad</a>
+            {% endif %}        </th>
+    </tr>
+    {% for user in table %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.total }}</td>
+        <td>{{ user.tags }}</td>
+        <td>{{ user.awesome }}%</td>
+        <td>{{ user.good }}%</td>
+        <td>{{ user.neutral }}%</td>
+        <td>{{ user.bad }}%</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}

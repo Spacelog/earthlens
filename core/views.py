@@ -189,7 +189,23 @@ class LeaderboardView(TemplateView):
     template_name = "leaderboard.html"
 
     def get_context_data(self):
+        table = []
+        vote_names = {0: "neutral", -1: "bad", 1: "good", 3: "awesome"}
+        for user in User.objects.all():
+            total = float(ImageVote.objects.filter(user=user).count())
+            if total:
+                votes = {vote_names[vote]: round(ImageVote.objects.filter(user=user, vote=vote).count()/total*100, 2) for vote in [0, 1, -1, 3]}
+            else:
+                votes = {}
+            votes["total"] = int(total)
+            votes["tags"] = UserTag.objects.filter(user=user).count()
+            votes["username"] = user.username
+            table.append(votes)
+        sort_key = self.request.GET.get("sort", "total")
+        descending = self.request.GET.get("descending", "true") is "true"
+        table.sort(key=lambda x: x.get(sort_key, None), reverse=descending)
         return {
-            "rated": User.objects.annotate(rated=Count("vote_objects")).order_by("-rated"),
-            "tagged": User.objects.annotate(tagged=Count("tag_objects")).order_by("-tagged"),
+            "table": table,
+            "sort_key": sort_key,
+            "descending": descending,
         }

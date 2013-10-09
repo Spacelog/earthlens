@@ -8,6 +8,9 @@ a {
     text-decoration: none;
 }
 
+strong {
+    font-weight: bold;
+}
 h1 {
     letter-spacing: 0.3em;
     text-transform: lowercase;
@@ -184,15 +187,18 @@ input.rating {
     font-size: 1.3em;
     border-radius: 3px;
     border: 0;
-    background-color: #2E4D87;
+    background-color: #779BC8;
 }
-    input.rating.neutral {
+    input.rating.awesome, th.awesome {
+        background-color: #779BC8;
+    }
+    input.rating.neutral, th.neutral {
         background-color: #B7BE1C;
     }
-    input.rating.bad {
+    input.rating.bad, th.bad {
         background-color: #B2221B;
     }
-    input.rating.good {
+    input.rating.good, th.good {
         background-color: #3C8749;
     }
 
@@ -258,6 +264,17 @@ input.tag {
     .lightbox .large-image .next-arrow:hover {
         background-image: url(../images/arrow_right.png);
     }
+
+table.leaderboard td, table.leaderboard th {
+    padding: 1em;
+    border: 1px solid #333333;
+}
+
+table.leaderboard th a {
+    font-weight: bold;
+    color: white;
+    text-decoration: underline;
+}
 
 /**** 1148px wide layout ****/
 
