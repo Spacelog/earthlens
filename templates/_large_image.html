@@ -24,11 +24,20 @@
         <h2>{{ image.name_with_preposition }}</h2>
         <ul>
             <li>
+                Taken
                 {% if image.get_descriptive_date %}
-                    {{ image.get_descriptive_date }}. 
+                  on {{ image.get_descriptive_date }}
                 {% endif %}
-                Taken by the crew of <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>.
+                by the crew of <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>
             </li>
+            <li>Camera: {{image.camera_model_text}}</li>
+            {% if image.exposure_text %}
+              <li>Exposure: {{image.exposure_text}}</li>
+            {% endif %}
+            {% if image.focal_length_text %}
+              <li>Focal length: {{image.focal_length_text}}</li>
+            {% endif %}
+            <li><a href="http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission={{image.code_parts.0}}&roll={{image.code_parts.1}}&frame={{image.code_parts.2}}">Image courtesy of NASA JSC</a></li>
             <li class="more">{{ image.description }}</li>
         </ul>
     </div>
