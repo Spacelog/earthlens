@@ -391,6 +391,9 @@ table.leaderboard th a {
     .large-image img {
         width: 760px;
     }
+    .show li {
+        margin: 10px 2px 10px 2px;
+    }
 
 }
 
