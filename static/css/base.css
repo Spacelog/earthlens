@@ -105,6 +105,9 @@ ol li {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
+    .image.in-group {
+        border-color: #C2822C;
+    }
     .image.large {
         width: 750px;
         height: 750px;

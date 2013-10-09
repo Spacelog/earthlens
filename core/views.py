@@ -10,8 +10,12 @@ def series_queryset(series):
         return Image.objects.order_by("-rating", "-votes", "id")
     elif series.startswith("m-"):
         return Image.objects.filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
+    elif series.startswith("mt-"):
+        return Image.objects.filter(mission__code__iexact=series[3:]).order_by("date", "code")
     elif series.startswith("t-"):
         return Image.objects.filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
+    elif series.startswith("tt-"):
+        return Image.objects.filter(tag_objects__tagged__slug=series[3:]).order_by("date", "code")
     else:
         raise ValueError("Unknown series %s" % series)
 
@@ -38,7 +42,7 @@ class IndexView(TemplateView):
         for i, image in enumerate(images):
             image.index = offset + i
         context["rows"] = self.make_rows(images)
-        if not context["rows"][0]:
+        if not context["rows"] or not context["rows"][0]:
             raise Http404("No images left")
         context["page_size"] = self.page_size
         context["series"] = self.series
@@ -60,6 +64,16 @@ class MissionView(IndexView):
     @property
     def series(self):
         return "m-" + self.kwargs['mission']
+
+
+class MissionTimelineView(IndexView):
+
+    row_pattern = [4]
+    page_size = 20
+
+    @property
+    def series(self):
+        return "mt-" + self.kwargs['mission']
 
 
 class TagView(IndexView):
@@ -94,27 +108,32 @@ class ImageView(DetailView):
         return context
 
     def post(self, request, pk, **kwargs):
-        if "good" in self.request.POST:
-            rating = 1
-        elif "bad" in self.request.POST:
-            rating = -1
-        elif "awesome" in self.request.POST:
-            rating = 3
-        else:
-            rating = 0
 
-        try:
-            vote = ImageVote.objects.get(user=request.user, image__pk=pk)
-        except ImageVote.DoesNotExist:
-            Image.objects.filter(pk=pk).update(
-                rating = F("rating") + rating,
-                votes = F("votes") + 1,
-            )
-            ImageVote.objects.create(user=request.user, image_id=pk, vote=rating)
+        if "group" in self.request.POST:
+            in_group = self.request.POST['group'] == "true"
+            Image.objects.filter(pk=pk).update(in_group=in_group)
         else:
-            Image.objects.filter(pk=pk).update(
-                rating = F("rating") + (rating - vote.vote),
-            )
+            if "good" in self.request.POST:
+                rating = 1
+            elif "bad" in self.request.POST:
+                rating = -1
+            elif "awesome" in self.request.POST:
+                rating = 3
+            else:
+                rating = 0
+
+            try:
+                vote = ImageVote.objects.get(user=request.user, image__pk=pk)
+            except ImageVote.DoesNotExist:
+                Image.objects.filter(pk=pk).update(
+                    rating = F("rating") + rating,
+                    votes = F("votes") + 1,
+                )
+                ImageVote.objects.create(user=request.user, image_id=pk, vote=rating)
+            else:
+                Image.objects.filter(pk=pk).update(
+                    rating = F("rating") + (rating - vote.vote),
+                )
 
         return HttpResponseRedirect(self.request.POST.get("next", "."))
 

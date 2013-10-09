@@ -5,14 +5,15 @@ from django.conf.urls.static import static
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout
 from django.contrib import admin
-from core.views import IndexView, ImageView, RateView, MissionView, TagView, TaggerView, LeaderboardView
+from core.views import IndexView, ImageView, RateView, MissionView, TagView, TaggerView, LeaderboardView, MissionTimelineView
 
 admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', IndexView.as_view(), name='index'),
     url(r'^mission/(?P<mission>[^/]+)/$', MissionView.as_view(), name='mission'),
-    url(r'^tag/(?P<slug>[^/]+)/$', TagView.as_view(), name='mission'),
+    url(r'^mission/(?P<mission>[^/]+)/timeline/$', MissionTimelineView.as_view(), name='mission-timeline'),
+    url(r'^tag/(?P<slug>[^/]+)/$', TagView.as_view(), name='tag'),
     url(r'^image/(?P<pk>\d+)/$', ImageView.as_view(), name='image'),
     url(r'^admin/', include(admin.site.urls)),
 

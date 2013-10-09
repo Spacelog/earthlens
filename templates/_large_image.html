@@ -13,6 +13,13 @@
         {% if user %}
             <a class="edit-link" href="/rate/?image={{ image.pk }}">Rate</a>
             <a class="edit-link" href="/tagger/?image={{ image.pk }}">Tag</a>
+            {% if user.is_staff %}
+                {% if image.in_group %}
+                    <a class="edit-link unmark-group" href="/tagger/?image={{ image.pk }}">Unmark group</a>
+                {% else %}
+                    <a class="edit-link mark-group" href="/tagger/?image={{ image.pk }}">Mark group</a>
+                {% endif %}
+            {% endif %}
         {% endif %}
         <h2>{{ image.geographic_name|title }}</h2>
         <ul>
@@ -35,6 +42,32 @@
             return false;
         }
     })
+    $(".large-image .mark-group").click(function (ev) {
+        $.ajax({
+            url: "{{ image.get_absolute_url }}",
+            method: "POST",
+            data: {group: true, csrfmiddlewaretoken: "{{ csrf_token }}"},
+            success: function () {
+                $(".next-arrow").click();
+            }
+        })
+        ev.preventDefault();
+        return false;
+    })
+    $(".large-image .unmark-group").click(function (ev) {
+        $.ajax({
+            url: "{{ image.get_absolute_url }}",
+            method: "POST",
+            data: {group: false, csrfmiddlewaretoken: "{{ csrf_token }}"},
+            success: function () {
+                $(".next-arrow").click();
+            }
+        })
+        ev.preventDefault();
+        return false;
+    })
     $(".large-image .more").hide();
-    twttr.widgets.load();
+    if (twttr) {
+        twttr.widgets.load();
+    }
 </script>

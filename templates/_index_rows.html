@@ -1,5 +1,5 @@
 {% for row in rows %}
-    {% if forloop.counter == 1 %}
+    {% if forloop.counter == 1 and row|length == 5 %}
         <div class="row row-5">
             <div class="column">
                 {% if row.1 %}{% include "_image_square.html" with image=row.1 %}{% endif %}
@@ -11,7 +11,7 @@
                 {% if row.4 %}{% include "_image_square.html" with image=row.4 %}{% endif %}
             </div>
         </div>
-    {% elif forloop.counter == 3 %}
+    {% elif forloop.counter == 3 and row|length == 5 %}
         <div class="row row-5">
             {% if row.0 %}{% include "_image_square.html" with image=row.0 extra_classes="large" %}{% endif %}
             <div class="column">
@@ -23,7 +23,7 @@
                 {% if row.4 %}{% include "_image_square.html" with image=row.4 %}{% endif %}
             </div>
         </div>
-    {% elif forloop.counter == 4 %}
+    {% elif forloop.counter == 4 and row|length == 5 %}
         <div class="row row-5">
             <div class="column">
                 {% if row.1 %}{% include "_image_square.html" with image=row.1 %}{% endif %}

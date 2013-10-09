@@ -1,4 +1,4 @@
-<p class="image {{ extra_classes }}">
+<p class="image {{ extra_classes }} {% if request.user.is_staff and image.in_group %}in-group{% endif %}">
     <a href="{% url "image" image.pk %}?series={{ series }}&amp;index={{ image.index }}">
         <img src="{{ image.get_square_url }}">
     </a>

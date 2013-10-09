@@ -52,6 +52,11 @@ class Image(models.Model):
     rating = models.IntegerField(default=0, db_index=True)
     votes = models.IntegerField(default=0, db_index=True)
 
+    # in_group is set by site admins, group_hides is automatically set
+    # on all but the best photo in a group.
+    in_group = models.BooleanField(default=False)
+    group_hides = models.BooleanField(default=False)
+
     def __str__(self):
         return self.code
 
