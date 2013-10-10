@@ -21,7 +21,7 @@ License
 
 The codebase is released under the [CC-0](http://creativecommons.org/publicdomain/zero/1.0/) license.
 
-Note that the data obtained using the geocoding API is under a different license, [CC-0](http://creativecommons.org/publicdomain/zero/1.0/).
+Note that the data obtained using the geocoding API is under a different license, [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/).
 
 
 Running the code
