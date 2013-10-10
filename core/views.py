@@ -1,4 +1,5 @@
 from django.views.generic import TemplateView, DetailView
+from django.views.decorators.cache import cache_control
 from django.db.models import F, Count
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
@@ -28,6 +29,10 @@ class IndexView(TemplateView):
     page_size = 23
     series = "index"
     show_groups = False
+
+    @cache_control(max_age=600)
+    def dispatch(self, *args, **kwargs):
+        return super(IndexView, self).dispatch(*args, **kwargs)
 
     def get_template_names(self):
         if self.request.GET.get("offset", 0):
@@ -112,6 +117,10 @@ class ImageView(DetailView):
     template_name = "image.html"
     model = Image
 
+    @cache_control(max_age=300)
+    def dispatch(self, *args, **kwargs):
+        return super(ImageView, self).dispatch(*args, **kwargs)
+
     def get_template_names(self):
         if self.request.GET.get("ajax", False):
             return ["_large_image.html"]
@@ -166,6 +175,10 @@ class RateView(TemplateView):
 
     template_name = "rate.html"
 
+    @cache_control(private=True, max_age=0)
+    def dispatch(self, *args, **kwargs):
+        return super(RateView, self).dispatch(*args, **kwargs)
+
     def get_context_data(self):
         if "image" in self.request.GET:
             image = Image.objects.get(pk=self.request.GET['image'])
@@ -184,6 +197,10 @@ class TaggerView(TemplateView):
 
     template_name = "tagger.html"
     model = Image
+
+    @cache_control(private=True, max_age=0)
+    def dispatch(self, *args, **kwargs):
+        return super(TaggerView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self):
         if "image" in self.request.GET:
@@ -211,6 +228,10 @@ class TaggerView(TemplateView):
 class LeaderboardView(TemplateView):
 
     template_name = "leaderboard.html"
+
+    @cache_control(private=True, max_age=30)
+    def dispatch(self, *args, **kwargs):
+        return super(LeaderboardView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self):
         table = []
