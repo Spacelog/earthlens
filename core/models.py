@@ -82,6 +82,14 @@ class Image(models.Model):
             else:
                 return name
 
+    @property
+    def roll(self):
+        return self.code.split("-")[1]
+
+    @property
+    def frame(self):
+        return self.code.split("-")[2]
+
     def name_with_preposition(self):
         return self.name(True)
 

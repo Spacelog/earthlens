@@ -38,7 +38,7 @@
             {% if image.focal_length_text %}
               <li class="more">Focal length: {{image.focal_length_text}}</li>
             {% endif %}
-            <li class="more"><a href="http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission={{image.code_parts.0}}&amp;roll={{image.code_parts.1}}&amp;frame={{image.code_parts.2}}">Image courtesy of NASA JSC</a></li>
+            <li class="more"><a href="http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission={{ image.mission.code }}&amp;roll={{ image.roll }}&amp;frame={{ image.frame }}" target="_blank">Image courtesy of NASA JSC</a></li>
             <li class="more">{{ image.description }}</li>
         </ul>
     </div>
