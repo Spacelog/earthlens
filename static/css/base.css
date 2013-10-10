@@ -60,9 +60,11 @@ ol li {
         font-size: 100%;
         text-transform: uppercase;
         color: white;
-        background: #333;
         padding: 0.7em 1em;
         margin: 0.5em 0 0 1em;
+    }
+    .logout-link:hover {
+        color: #4E97B5;
     }
 
 .content {
