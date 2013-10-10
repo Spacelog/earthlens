@@ -141,6 +141,9 @@
                 </a>
             </li>
         {% endfor %}
+        {% if current_mission or current_tag %}
+            <li class="show-all"><a href="/">Show all images</a></li>
+        {% endif %}
         </ul>
     </div>
 

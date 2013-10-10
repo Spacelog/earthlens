@@ -147,6 +147,17 @@ ol li {
         margin: 0.5em 0 0 0;
     }
 
+    .show li.show-all {
+        display: block;
+        padding: 0;
+        padding: 0 0 10px 0;
+        width: auto;
+        font-size: 12px;
+    }
+    .show li.show-all:hover {
+        background-color: transparent;
+    }
+
 .image-grid {
     position: relative;
     z-index: 2;
