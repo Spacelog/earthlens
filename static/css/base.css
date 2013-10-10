@@ -146,10 +146,28 @@ body.about {
     background-image: url(../images/about-earth-bg.jpg);
     background-position: -120px 0;
 }
+    .main-column {
+        float: left;
+        width: 40em;
+    }
+    .main-column h2:first-child {
+        margin-top: 0;
+    }
+    .right-column {
+        float: right;
+        width: 25em;
+    }
+    .right-column h3:first-child {
+        margin-top: 0;
+        font-size: 130%;
+    }
+    .about .main-column,
+    .about .right-column {
+        margin-top: 2em;
+    }
     .about p {
         margin: 0.5em 0 1.2em 0;
         line-height: 1.5em;
-        max-width: 40em;
     }
     .about h2 {
         font-size: 160%;
@@ -162,6 +180,23 @@ body.about {
     }
     .about p a {
         color: #4E97B5;
+    }
+
+.recommended {
+    margin: 0.5em 0;
+}
+    .recommended li {
+        margin-top: 1.5em;
+    }
+    .recommended img {
+        float: left;
+    }
+    .recommended h4 {
+        margin-left: 145px;
+        font-weight: bold;
+    }
+    .recommended p {
+        margin-left: 145px;
     }
 
 .row {
