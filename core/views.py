@@ -50,7 +50,7 @@ class IndexView(TemplateView):
         tags = Tag.objects.exclude(name='Skip')
         context["tags"] = tags
         
-        if "current_tag" in self.kwargs:
+        if "slug" in self.kwargs:
             context["current_tag"] = Tag.objects.get(slug=self.kwargs["slug"])
         
         if "mission" in self.kwargs:
