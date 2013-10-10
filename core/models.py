@@ -61,6 +61,9 @@ class Image(models.Model):
     def __str__(self):
         return self.code
 
+    def code_parts(self):
+        return self.code.split('-')
+
     def name(self, preposition=False):
         try:
             desc = ImageLocation.objects.get(image_id=self.id)
