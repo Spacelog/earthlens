@@ -242,7 +242,10 @@ class LeaderboardView(TemplateView):
         for user in User.objects.all():
             total = float(ImageVote.objects.filter(user=user).count())
             if total:
-                votes = {vote_names[vote]: round(ImageVote.objects.filter(user=user, vote=vote).count()/total*100, 2) for vote in [0, 1, -1, 3]}
+                votes = dict(
+                    (vote_names[vote], round(ImageVote.objects.filter(user=user, vote=vote).count()/total*100, 2))
+                    for vote in [0, 1, -1, 3]
+                )
                 votes["total"] = int(total)
                 votes["tags"] = UserTag.objects.filter(user=user).count()
                 votes["username"] = user.username
