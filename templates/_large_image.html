@@ -11,7 +11,7 @@
     <div class="meta">
         <span class="more-button"></span>
         <a href="https://twitter.com/share?url=http://earthlens.org{{ image.get_absolute_url }}&amp;text=Check+out+this+great+picture+of+Earth!&amp;via=earth_lens&amp;related=spacelog" data-count="none" class="twitter-share-button">Tweet</a>
-        {% if user %}
+        {% if user.is_authenticated %}
             <a class="edit-link" href="/rate/?image={{ image.pk }}">Rate</a>
             <a class="edit-link" href="/tagger/?image={{ image.pk }}">Tag</a>
             {% if user.is_staff %}
