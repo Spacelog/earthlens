@@ -4,3 +4,4 @@ beautifulsoup4
 psycopg2
 requests
 pycountry
+gunicorn
