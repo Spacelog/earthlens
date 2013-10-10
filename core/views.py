@@ -3,7 +3,7 @@ from django.views.decorators.cache import cache_control
 from django.db.models import F, Count
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, Http404
-from core.models import Image, ImageVote, Tag, UserTag
+from core.models import Image, ImageVote, Tag, UserTag, Mission
 
 
 def series_queryset(series):
@@ -50,11 +50,11 @@ class IndexView(TemplateView):
         tags = Tag.objects.exclude(name='Skip')
         context["tags"] = tags
         
-        try:
-            current_tag = Tag.objects.get(slug=self.kwargs["slug"])
-            context["current_tag"] = current_tag
-        except KeyError:
-            pass
+        if "current_tag" in self.kwargs:
+            context["current_tag"] = Tag.objects.get(slug=self.kwargs["slug"])
+        
+        if "mission" in self.kwargs:
+            context["current_mission"] = Mission.objects.get(code__iexact=self.kwargs["mission"])
         
         for i, image in enumerate(images):
             image.index = offset + i
@@ -84,7 +84,7 @@ class MissionView(IndexView):
         return "m-" + self.kwargs['mission']
 
 
-class MissionTimelineView(IndexView):
+class MissionTimelineView(MissionView):
 
     row_pattern = [4]
     page_size = 20
