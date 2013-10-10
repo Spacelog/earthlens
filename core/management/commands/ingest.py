@@ -41,7 +41,7 @@ class Command(BaseCommand):
                     print line
                     details['caption_text'] += line + "\n"
             elif last.lower().endswith("display record"):
-                details['code'] = line
+                details['code'] = line.upper()
                 details['mission'] = line.split("-")[0]
             elif line.lower().startswith("country or geog"):
                 details['geographic_name'] = line.split(":", 1)[1].strip()

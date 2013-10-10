@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^mission/(?P<mission>[^/]+)/$', MissionView.as_view(), name='mission'),
     url(r'^mission/(?P<mission>[^/]+)/timeline/$', MissionTimelineView.as_view(), name='mission-timeline'),
     url(r'^tag/(?P<slug>[^/]+)/$', TagView.as_view(), name='tag'),
-    url(r'^image/(?P<pk>\d+)/$', ImageView.as_view(), name='image'),
+    url(r'^image/(?P<code>[^/]+)/$', ImageView.as_view(), name='image'),
     url(r'^user/(?P<username>[^/]+)/awesome/$', UserAwesomeView.as_view(), name='user-awesome'),
 
     url(r'^leaderboard/$', login_required(LeaderboardView.as_view()), name='rate'),

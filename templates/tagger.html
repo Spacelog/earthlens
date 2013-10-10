@@ -29,7 +29,7 @@
             <img src="{{ image.get_large_url }}">
             {% if prev_image %}
                 <div class="previous-image">
-                    Previous image: <a href="{% url "image" prev_image.pk %}">{{ prev_image }}</a>
+                    Previous image: <a href="{{ image.get_absolute_url }}">{{ prev_image }}</a>
                 </div>
             {% endif %}
         {% else %}

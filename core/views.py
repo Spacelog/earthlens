@@ -121,6 +121,9 @@ class ImageView(DetailView):
     def dispatch(self, *args, **kwargs):
         return super(ImageView, self).dispatch(*args, **kwargs)
 
+    def get_object(self, *args, **kwargs):
+        return self.model.objects.get(code=self.kwargs['code'].upper())
+
     def get_template_names(self):
         if self.request.GET.get("ajax", False):
             return ["_large_image.html"]
@@ -135,16 +138,16 @@ class ImageView(DetailView):
             # This is part of a series; make previous/next links
             queryset = series_queryset(series)
             if index > 0:
-                context['previous_image_url'] = "/image/%s/?ajax=1&series=%s&index=%s" % (queryset[index - 1].id, series, index - 1)
+                context['previous_image_url'] = "%s?ajax=1&series=%s&index=%s" % (queryset[index - 1].get_absolute_url(), series, index - 1)
             if index < queryset.count() - 1:
-                context['next_image_url'] = "/image/%s/?ajax=1&series=%s&index=%s" % (queryset[index + 1].id, series, index + 1)
+                context['next_image_url'] = "%s?ajax=1&series=%s&index=%s" % (queryset[index + 1].get_absolute_url(), series, index + 1)
         return context
 
-    def post(self, request, pk, **kwargs):
+    def post(self, request, code, **kwargs):
 
         if "group" in self.request.POST:
             in_group = self.request.POST['group'] == "true"
-            Image.objects.filter(pk=pk).update(in_group=in_group)
+            Image.objects.filter(code=code).update(in_group=in_group)
         else:
             if "good" in self.request.POST:
                 rating = 1
@@ -156,15 +159,15 @@ class ImageView(DetailView):
                 rating = 0
 
             try:
-                vote = ImageVote.objects.get(user=request.user, image__pk=pk)
+                vote = ImageVote.objects.get(user=request.user, image__code=code)
             except ImageVote.DoesNotExist:
-                Image.objects.filter(pk=pk).update(
+                Image.objects.filter(code=code).update(
                     rating = F("rating") + rating,
                     votes = F("votes") + 1,
                 )
-                ImageVote.objects.create(user=request.user, image_id=pk, vote=rating)
+                ImageVote.objects.create(user=request.user, image=Image.objects.get(code=code), vote=rating)
             else:
-                Image.objects.filter(pk=pk).update(
+                Image.objects.filter(code=code).update(
                     rating = F("rating") + (rating - vote.vote),
                 )
 

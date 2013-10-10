@@ -86,7 +86,7 @@ class Image(models.Model):
         return self.name(True)
 
     def get_absolute_url(self):
-        return "/image/%s/" % self.pk
+        return "/image/%s/" % self.code.upper()
 
     def get_image_url(self, size="original"):
         return "%s%s/%s/%s.jpg" % (settings.IMAGE_BASE_URL, self.mission.code, size, self.code)
