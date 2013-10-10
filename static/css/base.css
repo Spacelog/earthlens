@@ -160,6 +160,7 @@ body.about {
     .right-column h3:first-child {
         margin-top: 0;
         font-size: 130%;
+        margin-bottom: -0.5em;
     }
     .about .main-column,
     .about .right-column {
@@ -186,7 +187,7 @@ body.about {
     margin: 0.5em 0;
 }
     .recommended li {
-        margin-top: 1.5em;
+        margin-top: 2em;
     }
     .recommended img {
         float: left;
@@ -197,6 +198,9 @@ body.about {
     }
     .recommended p {
         margin-left: 145px;
+    }
+    .recommended a {
+        color: #fff;
     }
 
 .row {
