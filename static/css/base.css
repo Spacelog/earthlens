@@ -305,6 +305,9 @@ body.about {
         color: inherit;
         text-decoration: underline;
     }
+    .large-image a:hover {
+        color: #4E97B5;
+    }
 
 .load-more {
     margin: 2em 0;
