@@ -37,9 +37,9 @@
             // Add it in
             $(".image span").css({bottom: -50});
             $(".image").hover(function () {
-                $(this).find("span").animate({bottom: 0});
+                $(this).find("span").animate({bottom: 0}, 100);
             }, function () {
-                $(this).find("span").animate({bottom: -50});
+                $(this).find("span").animate({bottom: -50}, 100);
             })
         }
 
