@@ -42,7 +42,17 @@ ol li {
     width: 1500px;
     margin: 1em auto 1em auto;
     position: relative;
+    overflow: hidden;
 }
+    .logo {
+        float: left;
+        padding: 7px 0 0 63px;
+        height: 52px;
+        background: url(../images/logo-globe-off.png) no-repeat;
+    }
+    .logo:hover {
+        background-image: url(../images/logo-globe-on.png);
+    }
     .about-link {
         float: right;
         font-weight: bold;
