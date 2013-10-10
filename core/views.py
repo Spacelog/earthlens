@@ -8,17 +8,17 @@ from core.models import Image, ImageVote, Tag, UserTag
 
 def series_queryset(series):
     if series == "index":
-        return Image.objects.exclude(group_hides=True).order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).order_by("-rating", "-votes", "id").distinct()
     elif series.startswith("m-"):
-        return Image.objects.exclude(group_hides=True).filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).filter(mission__code__iexact=series[2:]).order_by("-rating", "-votes", "id").distinct()
     elif series.startswith("mt-"):
-        return Image.objects.filter(mission__code__iexact=series[3:]).order_by("date", "code")
+        return Image.objects.filter(mission__code__iexact=series[3:]).order_by("date", "code").distinct()
     elif series.startswith("t-"):
-        return Image.objects.exclude(group_hides=True).filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id")
+        return Image.objects.exclude(group_hides=True).filter(tag_objects__tagged__slug=series[2:]).order_by("-rating", "-votes", "id").distinct()
     elif series.startswith("tt-"):
-        return Image.objects.filter(tag_objects__tagged__slug=series[3:]).order_by("date", "code")
+        return Image.objects.filter(tag_objects__tagged__slug=series[3:]).order_by("date", "code").distinct()
     elif series.startswith("ua-"):
-        return Image.objects.filter(vote_objects__user__username=series[3:], vote_objects__vote=3).order_by("date", "code")
+        return Image.objects.filter(vote_objects__user__username=series[3:], vote_objects__vote=3).order_by("date", "code").distinct()
     else:
         raise ValueError("Unknown series %s" % series)
 
