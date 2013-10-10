@@ -216,11 +216,22 @@ ol li {
         float: right;
         margin: 0.7em 1em 0.7em -0.3em;
     }
+    .large-image .more-button {
+        float: right;
+        cursor: pointer;
+        width: 20px;
+        height: 20px;
+        background-image: url(../images/up.png);
+        margin: 0.7em 1em 0.7em -0.3em;
+    }
+    .large-image .more-button.open {
+        background-image: url(../images/down.png);
+    }
     .large-image .twitter-share-button {
         float: right;
         margin: 0.7em 1em 0.7em -0.3em;
     }
-    .large-image img {
+    .large-image .main-image {
         max-width: 100%;
         cursor: -webkit-zoom-in;
         cursor: -moz-zoom-in;
@@ -231,7 +242,7 @@ ol li {
     }
     .large-image li {
         font-size: 90%;
-        margin: 0.3em 0 0.6em 60px;
+        margin: 0 0 0.6em 60px;
     }
     .large-image a {
         color: inherit;
@@ -300,7 +311,7 @@ input.tag {
         right: 10px;
         cursor: pointer;
     }
-    .lightbox .large-image img {
+    .lightbox .large-image .main-image {
         max-width: 100%;
         max-height: 100%;
         width: auto;
@@ -364,7 +375,7 @@ table.leaderboard th a {
         width: 574px;
         height: 574px;
     }
-    .large-image img {
+    .large-image .main-image {
         width: 1148px;
     }
 
@@ -388,7 +399,7 @@ table.leaderboard th a {
         width: 380px;
         height: 380px;
     }
-    .large-image img {
+    .large-image .main-image {
         width: 760px;
     }
     .show li {
@@ -418,7 +429,7 @@ table.leaderboard th a {
         width: 360px;
         height: 360px;
     }
-    .large-image img {
+    .large-image .main-image {
         width: 360px;
     }
     .about-link {

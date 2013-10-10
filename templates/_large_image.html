@@ -6,9 +6,10 @@
         <a href="{{ next_image_url }}" class="next-arrow"></a>
     {% endif %}
     <a href="{{ image.get_original_url }}" target="_blank" class="original">
-        <img src="{{ image.get_large_url }}">
+        <img src="{{ image.get_large_url }}" class="main-image">
     </a>
     <div class="meta">
+        <span class="more-button"></span>
         <a href="https://twitter.com/share?url=http://earthlens.org{{ image.get_absolute_url }}&amp;text=Check+out+this+great+picture+of+Earth!&amp;via=earth_lens&amp;related=spacelog" data-count="none" class="twitter-share-button">Tweet</a>
         {% if user %}
             <a class="edit-link" href="/rate/?image={{ image.pk }}">Rate</a>
@@ -30,14 +31,14 @@
                 {% endif %}
                 by the crew of <a href="{% url "mission" image.mission.code %}">{{ image.mission.name|default:image.mission.code }}</a>
             </li>
-            <li>Camera: {{image.camera_model_text}}</li>
+            <li class="more">Camera: {{image.camera_model_text}}</li>
             {% if image.exposure_text %}
-              <li>Exposure: {{image.exposure_text}}</li>
+              <li class="more">Exposure: {{image.exposure_text}}</li>
             {% endif %}
             {% if image.focal_length_text %}
-              <li>Focal length: {{image.focal_length_text}}</li>
+              <li class="more">Focal length: {{image.focal_length_text}}</li>
             {% endif %}
-            <li><a href="http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission={{image.code_parts.0}}&roll={{image.code_parts.1}}&frame={{image.code_parts.2}}">Image courtesy of NASA JSC</a></li>
+            <li class="more"><a href="http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission={{image.code_parts.0}}&amp;roll={{image.code_parts.1}}&amp;frame={{image.code_parts.2}}">Image courtesy of NASA JSC</a></li>
             <li class="more">{{ image.description }}</li>
         </ul>
     </div>
@@ -45,7 +46,8 @@
 <script>
     $(".large-image .meta").click(function (ev) {
         if (ev.target.tagName != "A") {
-            $(".more").fadeToggle("fast");
+            $(".more").slideToggle("fast");
+            $(".more-button").toggleClass("open");
             ev.preventDefault();
             return false;
         }
