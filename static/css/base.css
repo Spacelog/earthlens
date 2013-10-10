@@ -271,7 +271,7 @@ body.about {
     }
     .large-image .edit-link {
         float: right;
-        margin: 0.7em 1em 0.7em -0.3em;
+        margin: 0.7em 1.5em 0.7em -0.3em;
     }
     .large-image .more-button {
         float: right;
@@ -279,14 +279,14 @@ body.about {
         width: 20px;
         height: 20px;
         background-image: url(../images/up.png);
-        margin: 0.7em 1em 0.7em -0.3em;
+        margin: 0.7em 35px 0.7em -0.3em;
     }
     .large-image .more-button.open {
         background-image: url(../images/down.png);
     }
     .large-image .twitter-share-button {
         float: right;
-        margin: 0.7em 1em 0.7em -0.3em;
+        margin: 0.7em 1.5em 0.7em -0.3em;
     }
     .large-image .main-image {
         max-width: 100%;
@@ -364,8 +364,8 @@ input.tag {
 }
     .lightbox .close {
         position: absolute;
-        top: 10px;
-        right: 10px;
+        top: 35px;
+        right: 35px;
         cursor: pointer;
     }
     .lightbox .large-image .main-image {
@@ -383,7 +383,7 @@ input.tag {
     .lightbox .large-image .prev-arrow {
         position: absolute;
         top: 40%;
-        left: 10px;
+        left: 35px;
         width: 29px;
         height: 126px;
         background-image: url(../images/arrow_left_off.png);
@@ -394,7 +394,7 @@ input.tag {
     .lightbox .large-image .next-arrow {
         position: absolute;
         top: 40%;
-        right: 10px;
+        right: 35px;
         width: 29px;
         height: 126px;
         background-image: url(../images/arrow_right_off.png);
