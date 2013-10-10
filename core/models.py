@@ -70,7 +70,7 @@ class Image(models.Model):
                 return desc.location
         except ObjectDoesNotExist:
             if self.geographic_name is None or self.geographic_name == '':
-                name = 'Unknown'
+                return 'Unknown'
             else:
                 name = self.geographic_name.title().replace("-", " - ")
                 if name.startswith("Usa"):
