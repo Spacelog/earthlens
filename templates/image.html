@@ -1,9 +1,16 @@
 {% extends "base.html" %}
+
 {% block extra_head %}
-    <meta property="og:url" content="{{ image.get_absolute_url }}" />
+    <meta property="og:url" content="http://www.earthlens.org{{ image.get_absolute_url }}" />
     <meta property="og:title" content="{{ image.name }}"/>
     <meta property="og:image" content="{{ image.get_square_url }}"/>
+    
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:site" content="@earth_lens">
+    <meta name="twitter:title" content="{{ image.name }}">
+    <meta name="twitter:image:src" content="{{ image.get_square_url }}">
 {% endblock %}
+
 {% block content %}
     {% include "_large_image.html" %}
 {% endblock %}

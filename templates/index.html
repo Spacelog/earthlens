@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block extra_head %}
+    <meta property="og:url" content="http://www.earthlens.org/" />
+    <meta property="og:title" content="Earth Lens"/>
+    <meta property="og:image" content="{{ rows.0.0.get_square_url }}"/>
+    
+    <meta name="twitter:card" content="photo">
+    <meta name="twitter:site" content="@earth_lens">
+    <meta name="twitter:title" content="Earth Lens">
+    <meta name="twitter:image:src" content="{{ rows.0.0.get_square_url }}">
+
     <script>
         var next_offset = {{ page_size }};
         var loading = false;
