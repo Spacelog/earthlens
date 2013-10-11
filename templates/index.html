@@ -9,6 +9,7 @@
         var load_more = function () {
             // Make sure only one fetch runs at a time
             if (loading) return;
+            ga('send', 'pageview');
             loading = true;
             $(".load-more").addClass("loading");
             // Make the AJAX call
@@ -92,6 +93,7 @@
             $(document).on("click", ".image, .next-arrow, .prev-arrow", function (ev) {
                 // Open lightbox
                 open_lightbox();
+                ga('send', 'pageview');
                 url = $(this).attr("href");
                 if (!url) {
                     url = $(this).find("a").attr("href");
