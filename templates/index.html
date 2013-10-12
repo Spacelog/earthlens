@@ -142,7 +142,7 @@
 {% block content %}
 <div class="container">
     <div class="show">
-        <h2>Showing all {% if current_mission %}{{ current_mission.name }} {% endif %}images{% if current_tag %} for {{ current_tag.name }}{% endif %}</h2>
+      <h2>Showing all images{% if current_tag %} of {{ current_tag.name }}{% endif %}{% if current_mission %} taken during {{ current_mission.name }}{% endif %}</h2>
         <ul class="enhanced">
         {% for tag in tags %}
             <li>
