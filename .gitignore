@@ -1,5 +1,6 @@
 *.pyc
 static/missions/
+static/admin/
 env
 .vagrant
 local_settings.py
