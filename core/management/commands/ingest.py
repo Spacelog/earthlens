@@ -38,7 +38,6 @@ class Command(BaseCommand):
                     in_caption = False
                     details['caption_text'] = ((details['caption_text'] + "\n") if details['caption_text'] else None)
                 elif line:
-                    print line
                     details['caption_text'] += line + "\n"
             elif last.lower().endswith("display record"):
                 details['code'] = line.upper()
