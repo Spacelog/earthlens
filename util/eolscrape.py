@@ -11,7 +11,7 @@ PIXEL_THRESHOLD = 500000 # the smallest image we care about (pixels)
 SIZE_THRESHOLD = 10000000 # largest file we want (MB)
 
 def metadata_url(mission, roll, frame):
-    return "http://eol.jsc.nasa.gov/scripts/sseop/photo.pl?mission=%s&roll=%s&frame=%s" % \
+    return "http://192.68.196.38/scripts/sseop/photo.pl?mission=%s&roll=%s&frame=%s" % \
                     (mission.strip(), roll.strip(), frame.strip())
 
 def fetch_metadata(mrf):
@@ -43,7 +43,7 @@ def save_image(images):
             continue
         if image['size'] > SIZE_THRESHOLD:
             continue
-        url = "http://eol.jsc.nasa.gov" + image['url']
+        url = "http://192.68.196.38" + image['url']
         resp = requests.get(url)
         if resp.status_code == 200:
             suffix = url.split('.')[-1]
