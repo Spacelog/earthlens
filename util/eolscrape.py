@@ -19,7 +19,7 @@ def fetch_metadata(mrf):
     resp = requests.get(url)
     if resp.status_code != 200:
         raise Exception("Failure fetching URL %s: %s" % (url, resp.status_code))
-    return resp.text
+    return resp.content
 
 def extract_images(metadata):
     root = fromstring(metadata)
